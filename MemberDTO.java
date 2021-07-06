@@ -1,4 +1,4 @@
-package kr.co.domain;
+package kr.co.dto;
 import java.io.Serializable;
 import java.util.Date;
 //create table member(
