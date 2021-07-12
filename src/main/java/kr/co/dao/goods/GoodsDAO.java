@@ -28,6 +28,6 @@ public interface GoodsDAO {
 
 	void addAttach(String filename, String g_code);
 
-	List<String> getAttach(int gCode);
+	List<String> getAttach(String gCode);
 
 }

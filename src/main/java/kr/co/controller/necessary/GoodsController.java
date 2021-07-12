@@ -190,7 +190,7 @@ public class GoodsController {
 	
 
 	// read.GET
-	@RequestMapping(value = "/read/{g_code}", method = RequestMethod.GET)
+	@RequestMapping(value = "/read/{g_code}", method = RequestMethod.GET, produces = "text/plain;charset=utf8")
 	public String read(@PathVariable("g_code") String g_code, @ModelAttribute("curPage") Integer curPage, Model model) {
 		GoodsDTO dto = gService.read(g_code);
 		model.addAttribute("dto", dto);
@@ -208,7 +208,7 @@ public class GoodsController {
 	}
 
 	// update.POST
-	@RequestMapping(value = "/update/{g_code}", method = RequestMethod.POST)
+	@RequestMapping(value = "/update/{g_code}", method = RequestMethod.POST )
 	public String update(@PathVariable("g_code") String g_code, GoodsDTO dto, Integer curPage) {
 		// System.out.println(dto);
 		gService.update(dto);
@@ -245,7 +245,7 @@ public class GoodsController {
     }
     
     @ResponseBody
-	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST, produces="application/json" )
+	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST, produces="application/json; charset=utf8" )
 	public List<String> uploadfile(MultipartHttpServletRequest request) throws Exception {
 		String filename = null;
 		
@@ -285,8 +285,8 @@ public class GoodsController {
 	}
     
     @ResponseBody
-	@RequestMapping(value = "/getAttach/{gCode}", method = RequestMethod.GET)
-	public List<String> getAttach(@PathVariable("gCode") int gCode){
+	@RequestMapping(value = "/getAttach/{gCode}", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public List<String> getAttach(@PathVariable("gCode") String gCode){
 		return gService.getAttach(gCode);
 	}
     

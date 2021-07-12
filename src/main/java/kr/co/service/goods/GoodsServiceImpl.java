@@ -24,12 +24,11 @@ public class GoodsServiceImpl implements GoodsService {
 		if(files == null) {
 			return;
 		}
-		System.out.println(goods.getG_thumbnail());
+//		System.out.println(goods.getG_thumbnail());
 		for(String filename : files) {
 		    gDao.addAttach(filename, goods.getG_code());
 		}
 		
-		System.out.println(goods);
 	}
 
 	@Override
@@ -78,9 +77,10 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public List<String> getAttach(int gCode) {
-		// TODO Auto-generated method stub
+	public List<String> getAttach(String gCode) {
 		return gDao.getAttach(gCode);
 	}
+
+
 
 }

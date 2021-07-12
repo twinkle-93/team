@@ -52,7 +52,7 @@ function thumbnailView(imgSrc, filename){
 	
 	var msg = `
  	<div class=''>
-	    <img width="300" src="${src}" class="img-thumbnail">
+	    <img width="900" src="${src}" class="img-thumbnail">
 	</div>
  	`;
  	
@@ -66,19 +66,19 @@ function thumbnailView(imgSrc, filename){
  
  
  
- function uploadViewForm(getLinkText, filename){
+ function uploadViewForm(filename){
  	var src = '';
   
  	if(checkImageType(filename)){
-		src= "/displayFile?filename=" + filename;
+		src= "/resources/img" + filename;
 	}else{
 		src = "/resources/img/etc.png";
 	}
 	
  	var msg = `
  	<div class='col-Xg-1' >
-	<a target="_blank" href="${getLinkText}">
-		<img src="${src}" width="500">
+	<a target="_blank" href="${src}">
+		<img src="${src}" width="1000">
 	</a>
     </div>
  	`;
@@ -97,7 +97,7 @@ function thumbnailView(imgSrc, filename){
  	}
 
 	return "/displayFile?filename="+filename;
- }
+ } 
  
 function getOriginalName(filename){
 	var idx = -1;

@@ -74,7 +74,7 @@ public class Utils {
 		String thumbnailName = "_s_" + newName;
 
 		BufferedImage srcImg = ImageIO.read(new File(path, newName));
-		BufferedImage desImg = Scalr.resize(srcImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_EXACT, 200);
+		BufferedImage desImg = Scalr.resize(srcImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_EXACT, 900);
 		File thumnailFile = new File(path, thumbnailName);
 
 		ImageIO.write(desImg, "png", thumnailFile);

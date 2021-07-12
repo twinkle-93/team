@@ -15,6 +15,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>	
 <link href="/resources/css/read.css" rel="stylesheet" type="text/css">
+<script src="/resources/js/goods.js" type="text/javascript"></script>
 </head>
 <body>
 <jsp:include page="main_top.jsp"></jsp:include>
@@ -27,8 +28,9 @@
 			등록 날짜:	${dto.g_updateDate}</span>
 		</div>
 		
-		<div>
+		<div class="thumbnailView">
 			<img src="/resources/img/product/thumbnail/_s_${dto.g_code}.png">
+			<!-- 썸네일을 정사각형으로 저장해서 정사각형으로 나오게 해보려고 헀는데 잘 안되네요 ㅠㅠ -->
 		</div>
 		
 		<div>
@@ -38,8 +40,6 @@
 		<div>
 			<p class="name">${dto.g_name}</p>
 		</div>
-		
-		<div id="thumbnailImg"></div>
 		
 		<div>
 			<p class="price">가격 : 
@@ -63,8 +63,11 @@
 			${dto.g_content}
 		</div>
 		
-		<div id="multipleImgView"></div>
 	</div>	
+	
+	<div id="multipleImgView" style="text-align: center;"></div>
+	
+	
 		<div class="buttonList">
 			
 			<button id="listBtn">목록</button>
@@ -80,44 +83,47 @@
 			$("#homeBtn").click(function(event) {
 				event.preventDefault();
 				location.assign("/");
-			})
+			});
 			
 			$("#listBtn").click(function(event) {
 				event.preventDefault();
 				location.assign("/goods/list");
-			})
+			});
 			
 			$("#updateBtn").click(function(event) {
 				event.preventDefault();
 				location.assign("/goods/update/${dto.g_code}");
-			})
+			});
 			
 			$("#deleteBtn").click(function(event) {
 				event.preventDefault();
 				$("#deletePost").submit();
-			})
+			});
 			
 			var gCode = ${dto.g_code};
 			getAttach(gCode); 
 			
-		})
+			
+			function getAttach(gCode){
+				$.getJSON("/goods/getAttach/"+gCode, function(result) {
+					for(var i=0;i<result.length;i++){
+						var filename = result[i];
+						
+						var msg = uploadViewForm(filename);
+						$("#multipleImgView").append(msg);
+						console.log(msg);
+					}
+				});
+		} 
 		
 		
-		 function getAttach(gCode){
-		$.getJSON("/goods/getAttach/"+gCode, function(result) {
-			for(var i=0;i<result.length;i++){
-				var filename = result[i];
-				
-				var msg = uploadViewForm(getLinkText(filename), filename);
-				$("#multipleImgView").append(msg);
-			}
-		}); 
+		  
 		
 		
- 		var imgSrc = "/product/thumbnail/_s_"+${dto.g_code};
+/*  		var imgSrc = "/product/thumbnail/_s_"+${dto.g_code}+".png";
 		var msg = thumbnailView(imgSrc, filename);
-        $("#multipleImgView").append(msg); 
-	}
+        $("#multipleImgView").append(msg);  */
+	});
 		
 		
 		
