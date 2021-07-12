@@ -176,10 +176,10 @@
 		            });
 		    }
 		    
-		    function g_thumbnailSubmit(gCode) {
+		    function g_thumbnailSubmit(g_code) {
 
 				var formData = new FormData();
-				formData.append("gCode",gCode);
+				formData.append("g_code",g_code);
 				
 				var file = $('input[name="thumbnail"]');
 				var files = file[0].files;
@@ -219,19 +219,19 @@
 				
 				var largeCategory = $('#g_category_large').val();
 				var smallCategory = $('#good').val();
-				var gCode = $('#g_code').val(); 
+				var g_code = $('#g_code').val(); 
 				
-				g_thumbnailSubmit(gCode);
-				g_filesSubmit(largeCategory,smallCategory,gCode);
+				g_thumbnailSubmit(g_code);
+				g_filesSubmit(largeCategory,smallCategory,g_code);
 				
 			});
 			
-			function g_filesSubmit(largeCategory,smallCategory,gCode) {
+			function g_filesSubmit(largeCategory,smallCategory,g_code) {
 
 				var formData = new FormData();
 				formData.append("largeCategory",largeCategory);
 				formData.append("smallCategory",smallCategory);
-				formData.append("gCode",gCode);
+				formData.append("g_code",g_code);
 				
 				var file = $('input[name="g_files"]');
 				var files = file[0].files;

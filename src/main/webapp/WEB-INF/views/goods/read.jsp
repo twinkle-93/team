@@ -100,12 +100,12 @@
 				$("#deletePost").submit();
 			});
 			
-			var gCode = ${dto.g_code};
-			getAttach(gCode); 
+			var g_code = ${dto.g_code};
+			getAttach(g_code); 
 			
 			
-			function getAttach(gCode){
-				$.getJSON("/goods/getAttach/"+gCode, function(result) {
+			function getAttach(g_code){
+				$.getJSON("/goods/getAttach/"+g_code, function(result) {
 					for(var i=0;i<result.length;i++){
 						var filename = result[i];
 						

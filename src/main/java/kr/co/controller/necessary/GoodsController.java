@@ -251,7 +251,7 @@ public class GoodsController {
 		
 		String largeCategory = request.getParameter("largeCategory");
 		String smallCategory = request.getParameter("smallCategory");
-		String gCode = request.getParameter("gCode");		
+		String g_code = request.getParameter("g_code");		
 		 
 		List<MultipartFile> files = request.getFiles("file");
 		
@@ -261,7 +261,7 @@ public class GoodsController {
 		MultipartFile file = files.get(i);
 		String oriName = file.getOriginalFilename();
 		String uploadPath = sc.getRealPath(this.uploadPath);
-		filename = Utils.uploadFile(oriName, uploadPath, file, largeCategory, smallCategory, gCode);
+		filename = Utils.uploadFile(oriName, uploadPath, file, largeCategory, smallCategory, g_code);
 		filenames.add(filename);
 		}
 		
@@ -273,21 +273,20 @@ public class GoodsController {
 	@RequestMapping(value = "/uploadthumbnail", method = RequestMethod.POST )
 	public String uploadthumbnail(MultipartHttpServletRequest request) throws Exception {
 		String filename = null;
-		String gCode = request.getParameter("gCode");		
+		String g_code = request.getParameter("g_code");		
 		MultipartFile file = request.getFile("file");
-		System.out.println(file);
 		String oriName = file.getOriginalFilename();
 		String uploadPath = sc.getRealPath(this.uploadPath);
-		filename = Utils.uploadThumbnail(oriName, uploadPath, file, gCode);
+		filename = Utils.uploadThumbnail(oriName, uploadPath, file, g_code);
 
 	return filename;
 		
 	}
     
     @ResponseBody
-	@RequestMapping(value = "/getAttach/{gCode}", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public List<String> getAttach(@PathVariable("gCode") String gCode){
-		return gService.getAttach(gCode);
+	@RequestMapping(value = "/getAttach/{g_code}", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public List<String> getAttach(@PathVariable("g_code") String g_code){
+		return gService.getAttach(g_code);
 	}
     
     

@@ -96,9 +96,9 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	@Override
-	public List<String> getAttach(String gCode) {
+	public List<String> getAttach(String g_code) {
 		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE+".getGoodsAttach", gCode);
+		return session.selectList(NAMESPACE+".getGoodsAttach", g_code);
 	}
 
 }

@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Utils {
 	
-	public static String makeDir(String uploadPath, String largeCategory, String smallCategory, String gCode) {
+	public static String makeDir(String uploadPath, String largeCategory, String smallCategory, String g_code) {
 
 		File productFile = new File(uploadPath, "product");
 		if(!productFile.exists()) {
@@ -32,12 +32,12 @@ public class Utils {
 			smallCategoryFile.mkdir();
 		}
 		
-		File gCodeFile = new File(smallCategoryFile, gCode);
-		if(!gCodeFile.exists()) {
-			gCodeFile.mkdir();
+		File g_codeFile = new File(smallCategoryFile, g_code);
+		if(!g_codeFile.exists()) {
+			g_codeFile.mkdir();
 		}
 		
-		return gCodeFile.getAbsolutePath();
+		return g_codeFile.getAbsolutePath();
 	}
 
 	public static String reName(String oriName) {
@@ -83,9 +83,9 @@ public class Utils {
 	
 
 	public static String uploadFile(String oriName, String uploadPath,MultipartFile file,
-			String largeCategory, String smallCategory, String gCode) throws Exception {
+			String largeCategory, String smallCategory, String g_code) throws Exception {
 
-		String path = Utils.makeDir(uploadPath,largeCategory,smallCategory, gCode);
+		String path = Utils.makeDir(uploadPath,largeCategory,smallCategory, g_code);
 		String newName = Utils.reName(oriName);
 		File target = new File(path, newName);
 		FileCopyUtils.copy(file.getBytes(), target);
@@ -100,14 +100,14 @@ public class Utils {
 		return prefix + suffix;
 	}
 
-	public static String uploadThumbnail(String oriName,String uploadPath, MultipartFile file, String gCode) throws Exception{
+	public static String uploadThumbnail(String oriName,String uploadPath, MultipartFile file, String g_code) throws Exception{
 		File productFile = new File(uploadPath, "product");
 		File goodsThumbnailFile = new File(productFile, "thumbnail");
 		if(!goodsThumbnailFile.exists()) {
 			goodsThumbnailFile.mkdir();
 		}
 		String path = goodsThumbnailFile.getAbsolutePath();
-		String newName = gCode+'.'+ getExtendName(oriName);
+		String newName = g_code+'.'+ "png";
 		File target = new File(path, newName);
 		FileCopyUtils.copy(file.getBytes(), target);
 		

@@ -24,7 +24,6 @@ public class GoodsServiceImpl implements GoodsService {
 		if(files == null) {
 			return;
 		}
-//		System.out.println(goods.getG_thumbnail());
 		for(String filename : files) {
 		    gDao.addAttach(filename, goods.getG_code());
 		}
@@ -77,8 +76,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public List<String> getAttach(String gCode) {
-		return gDao.getAttach(gCode);
+	public List<String> getAttach(String g_code) {
+		return gDao.getAttach(g_code);
 	}
 
 
