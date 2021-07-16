@@ -26,6 +26,10 @@ public interface GoodsService {
 
 	int getAmount_search(String search_option, String keyword);
 
-	List<String> getAttach(String g_code);
+	List<String> getGoodsAttach(String g_code);
+
+
+
+
 
 }

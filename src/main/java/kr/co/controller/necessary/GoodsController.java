@@ -48,10 +48,10 @@ public class GoodsController {
 
 	// insert.POST
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public void insert(GoodsDTO goods) {
+	public String insert(GoodsDTO goods) {
 
 		gService.insert(goods);
-//		return "redirect:/goods/list/" + 1;
+		return "redirect:/goods/list/" + 1;
 	}
 
 	// list.GET
@@ -76,13 +76,13 @@ public class GoodsController {
 		return mav;
 	}
 
-	// �씪諛� 紐⑸줉�뿉�꽌 �궗�슜
+	// 일반 목록에서 사용
 	// list.Get.curPage
 	@RequestMapping(value = "/list/{curPage}", method = RequestMethod.GET)
 	public ModelAndView list(@PathVariable("curPage") Integer curPage) {
 		
-		// �뀒�뒪�듃
-		System.out.println("�럹�씠吏� �겢由��떆 �씪濡� �뱾�뼱�솕�떎 page1");
+		// 테스트
+		System.out.println("페이지 클릭시 일로 들어왔다 page1");
 		
 		PageTO<GoodsDTO> to = new PageTO<GoodsDTO>(curPage);
 		
@@ -106,15 +106,15 @@ public class GoodsController {
 	}
 	
 	
-	// 寃��깋 紐⑸줉�뿉�꽌 �궗�슜
+	// 검색 목록에서 사용
 	// list(search).Get.curPage
 	@RequestMapping(value = "/list/{curPage}/{search_option}/{keyword}", method = RequestMethod.GET)
 	public ModelAndView list(@PathVariable("curPage") Integer curPage, 
 			@PathVariable("search_option") String search_option,
 			@PathVariable("keyword") String keyword) {
 
-		// �뀒�뒪�듃
-		System.out.println("�럹�씠吏� �겢由��떆 �씪濡� �뱾�뼱�솕�떎 page2");
+		// 테스트
+		System.out.println("페이지 클릭시 일로 들어왔다 page2");
 		
 		PageTO<GoodsDTO> to = new PageTO<GoodsDTO>(curPage);
 		
@@ -123,7 +123,7 @@ public class GoodsController {
 		if(search_option!=null || keyword!=null)
 			amount = gService.getAmount_search(search_option, keyword);
 		
-		// �뀒�뒪�듃
+		// 테스트
 		System.out.println(amount);
 		to.setAmount(amount);
 
@@ -143,26 +143,26 @@ public class GoodsController {
 		return mav;
 	}
 
-	// list(search).POST
+	// list(search).POST 
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public ModelAndView list(
-			// �엯�젰�릺吏� �븡�쑝硫�, default 媛믪쑝濡� g_code/"" 瑜� 諛쏆븘�삩�떎
+			// 입력되지 않으면, default 값으로 g_code/"" 를 받아온다
 			@RequestParam(defaultValue = "g_name") String search_option,
 			@RequestParam(defaultValue = "") String keyword) throws Exception {
 
 		int curpage = 1;
 		
-		// amount瑜� goods 紐⑤뱺 媛쒖닔�뿉�꽌 媛��졇�삤�뒗 臾몄젣�젏�씠 議댁옱�븳�떎
+		// amount를 goods 모든 개수에서 가져오는 문제점이 존재한다
 		// int amount = gService.getAmount();
 		int amount = gService.getAmount_search(search_option, keyword);
 
 		PageTO<GoodsDTO> to = new PageTO<GoodsDTO>(curpage);
-		// System.out.println("getFinishedPageNum(to �깮�꽦�븯�옄 留덉옄): " + to.getFinishedPageNum());
+		// System.out.println("getFinishedPageNum(to 생성하자 마자): " + to.getFinishedPageNum());
 		to.setAmount(amount);
-		// System.out.println("getFinishedPageNum(amount 議곗젙�븯�옄 留덉옄 ): " + to.getFinishedPageNum());
+		// System.out.println("getFinishedPageNum(amount 조정하자 마자 ): " + to.getFinishedPageNum());
 
-		// 諛섑솚�븷 媛�
-		// search_option, keyword, count(寃��깋寃곌낵 �닔), list(寃��깋 寃곌낵臾�)
+		// 반환할 값
+		// search_option, keyword, count(검색결과 수), list(검색 결과물)
 		List<GoodsDTO> list = gService.listAll(to.getStartNum(), to.getPerPage(), search_option, keyword);
 		to.setList(list);
 		int count = gService.getCount(search_option, keyword);
@@ -176,11 +176,11 @@ public class GoodsController {
 		
 		mav.addObject("map", map);
 		
-		// 寃��깋�떆 �럹�씠吏� 泥섎━瑜� �쐞�븳 �뀒�뒪�듃
+		// 검색시 페이징 처리를 위한 테스트
 		// System.out.println("getList: " + to.getList());
 		// System.out.println("getBeginPageNum: " + to.getBeginPageNum());
 		
-		// 寃��깋 寃곌낵臾쇱뿉 �뵲瑜� getFinishedPageNum 媛� �옉�룞�릺吏� �븡�쓬�쓣 �솗�씤�븷 �닔 �엳�떎
+		// 검색 결과물에 따른 getFinishedPageNum 가 작동되지 않음을 확인할 수 있다
 		// System.out.println("getFinishedPageNum: " + to.getFinishedPageNum());
 		// System.out.println("getCurPage: " + to.getCurPage());
 		
@@ -191,7 +191,8 @@ public class GoodsController {
 
 	// read.GET
 	@RequestMapping(value = "/read/{g_code}", method = RequestMethod.GET, produces = "text/plain;charset=utf8")
-	public String read(@PathVariable("g_code") String g_code, @ModelAttribute("curPage") Integer curPage, Model model) {
+	public String read(@PathVariable("g_code") String g_code,
+			 @ModelAttribute("curPage") Integer curPage, Model model) {
 		GoodsDTO dto = gService.read(g_code);
 		model.addAttribute("dto", dto);
 		
@@ -200,8 +201,8 @@ public class GoodsController {
 
 	// update.GET
 	@RequestMapping(value = "/update/{g_code}", method = RequestMethod.GET)
-	public String update(@PathVariable("g_code") String g_code, @ModelAttribute("curPage") Integer curPage,
-			Model model) {
+	public String update(
+			@PathVariable("g_code") String g_code, @ModelAttribute("curPage") Integer curPage,Model model) {
 		GoodsDTO dto = gService.read(g_code);
 		model.addAttribute("dto", dto);
 		return "/goods/update";
@@ -209,17 +210,17 @@ public class GoodsController {
 
 	// update.POST
 	@RequestMapping(value = "/update/{g_code}", method = RequestMethod.POST )
-	public String update(@PathVariable("g_code") String g_code, GoodsDTO dto, Integer curPage) {
+	public String update(@PathVariable("g_code") String g_code, GoodsDTO dto , Integer curPage) {
 		// System.out.println(dto);
 		gService.update(dto);
-		return "redirect:/goods/read/" + dto.getG_code() + "?curPage=" + curPage;
+		return "redirect:/goods/read/" + dto.getG_code() + "?curPage=" + 1;
 	}
 
 	// delete.GET
 	@RequestMapping(value = "/delete/{g_code}", method = RequestMethod.POST)
-	public String delete(@PathVariable("g_code") String g_code, @ModelAttribute("curPage") Integer curPage) {
+	public String delete(@PathVariable("g_code") String g_code , @ModelAttribute("curPage") Integer curPage) {
 		gService.delete(g_code);
-		return "redirect:/goods/list/" + curPage;
+		return "redirect:/goods/list" + curPage ;
 	}
 
 	// delete.ajax.POST
@@ -280,14 +281,50 @@ public class GoodsController {
 		filename = Utils.uploadThumbnail(oriName, uploadPath, file, g_code);
 
 	return filename;
-		
 	}
     
     @ResponseBody
-	@RequestMapping(value = "/getAttach/{g_code}", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public List<String> getAttach(@PathVariable("g_code") String g_code){
-		return gService.getAttach(g_code);
+	@RequestMapping(value = "/getGoodsAttach/{g_code}", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public List<String> getGoodsAttach(@PathVariable("g_code") String g_code){
+		return gService.getGoodsAttach(g_code);
 	}
+    
+    @ResponseBody
+	@RequestMapping(value = "/deleteThumbnail", method = RequestMethod.POST, produces = "text/plain;charset=utf8")
+	public void deleteThumbnail(HttpServletRequest request){
+    	String g_code = request.getParameter("g_code");
+		 String thumbnailFilename = "_s_"+g_code+".png";
+		 thumbnailFilename = thumbnailFilename.replace('/', File.separatorChar);
+		 String filename = g_code+".png";
+		 filename = filename.replace('/', File.separatorChar);
+		 String path = sc.getRealPath(this.uploadPath+File.separator+"product"+File.separator+"thumbnail");
+		 File f = new File(path, filename);
+		 File tF = new File(path, thumbnailFilename);
+		 System.out.println(thumbnailFilename);
+		 if(f.exists()) {
+			 f.delete();
+		 }
+		 if(tF.exists()) {
+			 tF.delete();
+		 }
+	}
+    
+	@ResponseBody
+   	@RequestMapping(value = "/deleteGoodsAttach", method = RequestMethod.POST, produces = "text/plain;charset=utf8")
+   	public void deleteGoodsAttach(HttpServletRequest request){
+    	String[] filenames = request.getParameterValues("filenames");
+    	
+    	for (int i = 0; i < filenames.length; i++) {
+    		String filename = filenames[i];
+    		filename = filename.replace('/', File.separatorChar);
+    		String path = sc.getRealPath(this.uploadPath);
+          	File f = new File(path, filename);
+          	if(f.exists()) {
+           		f.delete();
+    		}
+       	}
+   	}
+    
     
     
 	   

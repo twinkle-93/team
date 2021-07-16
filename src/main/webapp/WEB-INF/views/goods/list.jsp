@@ -44,11 +44,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${to.list}" var="goods">
+					<c:forEach items="${map.to.list}" var="goods">
 						<tr>
 							<td><input id="selectCheck" name="selectCheck" type="checkbox" value="${goods.g_code}"></td>
 							<td>${goods.g_num}</td>
-							<td><a style="color: black;" href="/goods/read/${goods.g_code}">
+							<td><a style="color: black;" href="/goods/read/${goods.g_code}?curPage=${map.to.curPage}">
 							<span class="glyphicon glyphicon-search" aria-hidden="true">${goods.g_code}</span></a></td>
 							<td>${goods.g_category_large}</td>
 							<td>${goods.g_category_small}</td>

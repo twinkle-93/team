@@ -2,7 +2,7 @@
 /**
  * 
  */
- 
+var uploadPath = "/resources/img/"; 
 
  function getFileUploadFilenameInput(index, filename){
     var msg = `
@@ -32,9 +32,9 @@ function thumbnailUploadFilename(filename){
  	var msg = `
  	<div class='col-Xg-1'>
 		<a target="_blank" href="${getLinkText}">
-			<img width="500" src="${src}" >
+			<img width="600" src="${src}" >
 		</a>
-		<button type="button" class="delFile btn btn-xs btn-outline-danger" data-filename="${filename}">x</button>
+		<button type="button" style="float: right;" class="delFile btn btn-s btn-warning" data-filename="${filename}">x</button>
 	</div>
  	`;
  	
@@ -52,7 +52,7 @@ function thumbnailView(imgSrc, filename){
 	
 	var msg = `
  	<div class=''>
-	    <img width="900" src="${src}" class="img-thumbnail">
+	    <img width="600" height="600" src="${src}" class="img-thumbnail" >
 	</div>
  	`;
  	
@@ -70,7 +70,7 @@ function thumbnailView(imgSrc, filename){
  	var src = '';
   
  	if(checkImageType(filename)){
-		src= "/resources/img" + filename;
+		src= uploadPath + filename;
 	}else{
 		src = "/resources/img/etc.png";
 	}
@@ -85,6 +85,30 @@ function thumbnailView(imgSrc, filename){
  	
  	return msg;
  }
+
+function updateViewForm(filename){
+ 	var src = '';
+  
+ 	if(checkImageType(filename)){
+		src= uploadPath + filename;
+	}else{
+		src = "/resources/img/etc.png";
+	}
+	
+ 	var msg = `
+ 	<div class='col-Xg-1' >
+	<a target="_blank" href="${src}">
+		<img src="${src}" width="600">
+	</a>
+	<button type="button" style="float: right;" class="delFile btn btn-s btn-warning" data-filename="${filename}">x</button>
+	
+    </div>
+ 	`;
+ 	
+ 	return msg;
+ }
+
+
  
  
  function getLinkText(filename){
@@ -107,7 +131,6 @@ function getOriginalName(filename){
 	}else{
 		idx = filename.indexOf("_")+1;
 	}
-	
 	return filename.substring(idx);
 } 
  

@@ -96,9 +96,17 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	@Override
-	public List<String> getAttach(String g_code) {
-		// TODO Auto-generated method stub
+	public List<String> getGoodsAttach(String g_code) {
 		return session.selectList(NAMESPACE+".getGoodsAttach", g_code);
 	}
+
+	@Override
+	public void deleteAttach(String g_code) {
+		session.delete(NAMESPACE+".deleteAttach", g_code);
+	}
+	
+
+
+
 
 }

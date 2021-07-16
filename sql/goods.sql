@@ -19,10 +19,8 @@ g_check number default 0,
 g_point number default 0
 )
 
-select g_thumbnail from goods
 select * from goods
 
 delete from goods
 
-ALTER TABLE goods DROP COLUMN g_filename;
-ALTER TABLE goods ADD g_thumbnail varchar2(300);
+ALTER TABLE goods DROP COLUMN g_thumbnail;

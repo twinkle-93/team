@@ -189,7 +189,7 @@
 				
 				$.ajax({
 					type : 'post',
-					url : '/goods/uploadthumbnail',
+					url : '/goods/uploadthumbnail/',
 					processData : false,
 					contentType : false,
 					data : formData,

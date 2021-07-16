@@ -17,15 +17,15 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Transactional
 	@Override
-	public void insert(GoodsDTO goods) {
-		gDao.insert(goods);
+	public void insert(GoodsDTO dto) {
+		gDao.insert(dto);
 		
-		String[] files = goods.getG_filename();
+		String[] files = dto.getG_filename();
 		if(files == null) {
 			return;
 		}
 		for(String filename : files) {
-		    gDao.addAttach(filename, goods.getG_code());
+		    gDao.addAttach(filename, dto.getG_code());
 		}
 		
 	}
@@ -43,11 +43,23 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void update(GoodsDTO dto) {
 		gDao.update(dto);
+		
+		gDao.deleteAttach(dto.getG_code());
+		if(dto.getG_filename() == null) {
+			return;
+		}
+		
+		for(String filename : dto.getG_filename()) {
+			gDao.addAttach(filename, dto.getG_code());
+			System.out.println(filename);
+		}
+		
 	}
 
 	@Override
 	public void delete(String g_code) {
 		gDao.delete(g_code);
+		gDao.deleteAttach(g_code);
 	}
 
 	@Override
@@ -76,9 +88,14 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public List<String> getAttach(String g_code) {
-		return gDao.getAttach(g_code);
+	public List<String> getGoodsAttach(String g_code) {
+		return gDao.getGoodsAttach(g_code);
 	}
+
+
+
+
+
 
 
 

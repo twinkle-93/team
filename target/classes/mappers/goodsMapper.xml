@@ -8,7 +8,7 @@
 		insert into goods (g_category_large,
 		g_category_small, g_num, g_name, g_size, g_price, g_content, g_code,
 		g_amount,
-		g_point, g_thumbnail)
+		g_point)
 		values
 		(#{g_category_large},
 		#{g_category_small},
@@ -18,7 +18,7 @@
 		#{g_size},
 		#{g_price}, #{g_content}, #{g_code},
 		#{g_amount},
-		#{g_point}, #{g_thumbnail})
+		#{g_point})
 	</insert>
 	
 	<insert id="addGoodsAttach">
@@ -31,8 +31,7 @@
 	</select>
 
 	<select id="list" resultType="GoodsDTO">
-		select * from goods order by g_num
-		asc
+		select * from goods order by g_num asc
 	</select>
 
 	<select id="read" resultType="GoodsDTO">
@@ -100,13 +99,17 @@
 	
 	
 	<select id="getAmount_search" resultType="Integer">
-		select count(*) from goods
+		select count(*) from goods 
 		<include refid="search"></include>
 	</select>
 	
 	<select id="getAttach" resultType="string">
-		SELECT a_filename FROM attach WHERE a_code = #{g_code}
+		SELECT a_filename FROM attach WHERE a_code = #{g_code} order by a_filenum asc
 	</select>
+	
+	<delete id="deleteAttach">
+	    DELETE from attach WHERE a_code = #{g_code}
+	</delete>
 	
 	
 

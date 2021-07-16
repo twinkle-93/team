@@ -26,7 +26,6 @@ public class GoodsDTO implements Serializable {
 	private int g_starAmount;
 	private int g_check;
 	private int g_point;
-	private String g_thumbnail;
 
 	public GoodsDTO() {
 		// TODO Auto-generated constructor stub
@@ -53,7 +52,6 @@ public class GoodsDTO implements Serializable {
 		this.g_starAmount = g_starAmount;
 		this.g_check = g_check;
 		this.g_point = g_point;
-		this.g_thumbnail = g_thumbnail;
 	}
 
 	public String getG_category_large() {
@@ -188,17 +186,6 @@ public class GoodsDTO implements Serializable {
 		return serialVersionUID;
 	}
 
-	
-	public String getG_thumbnail() {
-		return g_thumbnail;
-	}
-
-
-	public void setG_thumbnail(String g_thumbnail) {
-		this.g_thumbnail = g_thumbnail;
-	}
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -232,8 +219,11 @@ public class GoodsDTO implements Serializable {
 				+ g_content + ", g_code=" + g_code + ", g_amount=" + g_amount + ", g_regDate=" + g_regDate
 				+ ", g_updateDate=" + g_updateDate + ", g_filename=" + Arrays.toString(g_filename) + ", g_likeAmount="
 				+ g_likeAmount + ", g_starAmount=" + g_starAmount + ", g_check=" + g_check + ", g_point=" + g_point
-				+ ", g_thumbnail=" + g_thumbnail + "]";
+				+ "]";
 	}
+
+	
+	
 
 	
 

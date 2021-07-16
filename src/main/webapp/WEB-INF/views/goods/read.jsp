@@ -67,7 +67,6 @@
 	
 	<div id="multipleImgView" style="text-align: center;"></div>
 	
-	
 		<div class="buttonList">
 			
 			<button id="listBtn">목록</button>
@@ -92,7 +91,7 @@
 			
 			$("#updateBtn").click(function(event) {
 				event.preventDefault();
-				location.assign("/goods/update/${dto.g_code}");
+				location.assign("/goods/update/${dto.g_code}?curPage=1");
 			});
 			
 			$("#deleteBtn").click(function(event) {
@@ -101,28 +100,20 @@
 			});
 			
 			var g_code = ${dto.g_code};
-			getAttach(g_code); 
+			getGoodsAttach(g_code); 
 			
 			
-			function getAttach(g_code){
-				$.getJSON("/goods/getAttach/"+g_code, function(result) {
+			function getGoodsAttach(g_code){
+				$.getJSON("/goods/getGoodsAttach/"+g_code, function(result) {
 					for(var i=0;i<result.length;i++){
 						var filename = result[i];
 						
 						var msg = uploadViewForm(filename);
 						$("#multipleImgView").append(msg);
-						console.log(msg);
 					}
 				});
 		} 
 		
-		
-		  
-		
-		
-/*  		var imgSrc = "/product/thumbnail/_s_"+${dto.g_code}+".png";
-		var msg = thumbnailView(imgSrc, filename);
-        $("#multipleImgView").append(msg);  */
 	});
 		
 		

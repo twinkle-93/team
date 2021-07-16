@@ -6,14 +6,14 @@
 
 	<nav aria-label="Page navigation">
 		<ul class="pagination">
-			<li><a href="/goods/list/${to.curPage-1 > 0 ? to.curPage-1 : 1}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+			<li><a href="/goods/list/${map.to.curPage-1 > 0 ? map.to.curPage-1 : 1}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
 
-			<c:forEach begin="${to.beginPageNum}" end="${to.finishedPageNum}" var="curPage">
+			<c:forEach begin="${map.to.beginPageNum}" end="${map.to.finishedPageNum}" var="curPage">
 				<!-- 만약, 원하는 개수를 보고 싶은경우 curPage 뒤에 perPage 값을 넘겨줘야한다  -->
-				<li class="${to.curPage == curPage ? 'active' : ''}"><a href="/goods/list/${curPage}">${curPage}</a></li>
+				<li class="${map.to.curPage == curPage ? 'active' : ''}"><a href="/goods/list/${curPage}">${curPage}</a></li>
 			</c:forEach>
 
-			<li><a href="/goods/list/${to.curPage+1<=to.totalPage ? to.curPage+1 : to.curPage}" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+			<li><a href="/goods/list/${map.to.curPage+1<=map.to.totalPage ? map.to.curPage+1 : map.to.curPage}" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 		</ul>
 	</nav>
 
