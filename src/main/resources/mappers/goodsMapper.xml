@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.goods">
+
+	<insert id="insert">
+		insert into goods (g_category_large,
+		g_category_small, g_num, g_name, g_size, g_price, g_content, g_code,
+		g_amount,
+		g_point)
+		values
+		(#{g_category_large},
+		#{g_category_small},
+		(select
+		nvl2(max(g_num), max(g_num)+1 ,1) from
+		goods), #{g_name},
+		#{g_size},
+		#{g_price}, #{g_content}, #{g_code},
+		#{g_amount},
+		#{g_point})
+	</insert>
+	
+	<insert id="addGoodsAttach">
+		INSERT INTO attach (a_filename, a_code, a_filenum) 
+		VALUES (#{filename}, #{g_code}, (select nvl2(max(a_filenum), max(a_filenum)+1 ,1) from attach))
+	</insert>
+	
+	<select id="getGoodsAttach" resultType="string">
+		SELECT * FROM attach WHERE a_code = #{g_code}
+	</select>
+	
+	<select id="getAttach" resultType="string">
+		SELECT a_filename FROM attach WHERE a_code = #{g_code}
+	</select>
+	
+	<select id="list" resultType="GoodsDTO">
+		select * from goods order by g_num
+		asc
+	</select>
+
+	<select id="read" resultType="GoodsDTO">
+		select * from goods where g_code =
+		#{g_code}
+	</select>
+
+	<update id="update">
+		update goods set g_category_large =
+		#{g_category_large},
+		g_category_small = #{g_category_small},
+		g_name =
+		#{g_name},
+		g_size = #{g_size},
+		g_price = #{g_price},
+		g_content =
+		#{g_content},
+		g_point = #{g_point}
+		where g_code
+		= #{g_code}
+	</update>
+
+	<delete id="delete">
+		delete from goods where g_code = #{g_code}
+	</delete>
+
+	<select id="getAmount" resultType="Integer">
+		select count(g_code) from goods
+	</select>
+	
+	<select id="listAll" resultType="GoodsDTO">
+		select * from goods 
+		<include refid="search"></include>
+		order by g_num asc
+	</select>
+	
+	<select id="getCount" resultType="Integer">
+		select count(*) from goods 
+		<include refid="search"></include>
+	</select>
+	
+	<sql id="search">
+		<choose>
+			<!-- 전체검색일 경우 -->
+			<when test="search_option == 'all'">
+				where g_name like '%'||#{keyword}||'%'
+				or g_code like '%'||#{keyword}||'%'
+				or g_price like '%'||#{keyword}||'%'
+			</when>
+			
+			<otherwise>
+				where ${search_option} like '%'||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="getAmount_search" resultType="Integer">
+		select count(*) from goods
+		<include refid="search"></include>
+	</select>
+	
+	<select id="getReviewAttach" resultType="string">
+		SELECT * FROM attach WHERE a_code = #{g_code} and a_bno = #{r_bno}
+	</select>
+	
+	<select id="list_category_large" resultType="GoodsDTO">
+		SELECT * FROM goods WHERE g_category_large = #{g_category_large} order by g_num
+	</select>
+	<select id="list_category_small" resultType="GoodsDTO">
+		SELECT * FROM goods WHERE g_category_small = #{g_category_small} order by g_num
+	</select>
+</mapper>
