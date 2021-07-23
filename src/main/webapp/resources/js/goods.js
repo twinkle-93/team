@@ -123,7 +123,7 @@ function checkImageType(filename){
 	
 }	
 
-function listByRegDate(r_num, r_id, r_code, r_star, r_regDate, r_title, r_content, userId, r_updateDate){
+function list(r_num, r_id, r_code, r_star, r_regDate, r_title, r_content, userId, r_updateDate){
 	var update = '';
 	if(r_updateDate !== null){
 		update = `수정됨 : ${r_updateDate}`;
@@ -186,6 +186,17 @@ function stars(r_star){
 
     return star;
 }
+
+function pageJSP(g_code, curPage, listType){	
+	var msg =`<a listType=${listType} class="pageNum" g_code=${g_code}>${curPage}</a>`;
+	return msg;
+}
+
+function activePage(g_code, curPage, listType){	
+	var msg =`<a listType=${listType} class="pageNum active" g_code=${g_code}>${curPage}</a>`;
+	return msg;
+}
+
 
 
  

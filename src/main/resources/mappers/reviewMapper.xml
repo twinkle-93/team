@@ -39,6 +39,9 @@
         DELETE FROM review WHERE r_num = #{r_num}
     </delete>
     
+    <select id="getAmount" resultType="integer">
+		SELECT COUNT(r_num) FROM review WHERE r_code=#{r_code}
+	</select>
     
     
 

@@ -24,6 +24,7 @@ label {width:80px; height: 30px; text-align: justify;}
 .r_star a.on{color: red;}
 .underline a {text-decoration: underline; color: orange;}
 .readStar a{pointer-events: none; cursor: default;}
+.active { }  /*  rivewlist 클릭한 페이지버튼 active class*/
 
 </style>
 </head>
@@ -91,7 +92,7 @@ label {width:80px; height: 30px; text-align: justify;}
 			</form>
 		
 		
-		<h3 style="display:inline;">상품리뷰  <a id="starAve"></a></h3>  <a id="maxReview"></a>건 
+		<h3 style="display:inline;">상품리뷰  <a id="starAve"></a></h3>  <a id="reviewsAmount"></a>건 
 		
 		<ul id="review" style="display:inline; float: right; margin-top: 20px;">
 	        <li id="highStarList"><a href="#">평점 높은순</a></li>
@@ -118,8 +119,21 @@ label {width:80px; height: 30px; text-align: justify;}
 	    </div>
 	    
 	    <div id="reviewList"></div>
+	    <div id="listPage">
+	        <nav aria-label="Page navigation">
+		        <ul class="pagination">
+			        <li><a class="previous" aria-label="Previous"> <span id="previous" aria-hidden="true">&laquo;</span></a></li>
+				        <li id="pageNum"></li>
+			        <li><a class="next" aria-label="Next"> <span id="next" aria-hidden="true">&raquo;</span></a></li>
+		        </ul>
+	        </nav>
+	    </div>
 	    
-	</div>    
+	    
+	    
+	    
+	</div>
+
 	
 	
 <!-- <div id="multipleImgView" style="text-align: center;"></div> -->
@@ -129,7 +143,7 @@ label {width:80px; height: 30px; text-align: justify;}
 			<button id="updateBtn">수정</button>
 			<button id="deleteBtn">삭제</button>
 		</div>
-    </div>
+</div>
 	<form id="deletePost" action="/goods/delete/${dto.g_code}?curPage=${curPage}" method="post"></form>
 	
 	
@@ -161,7 +175,7 @@ label {width:80px; height: 30px; text-align: justify;}
 			});
 			
 			var g_code = ${dto.g_code};
-			getReviewListByRegDate(g_code);
+			getReviewListByRegDate(g_code,1);
 			$('#reviewInsertForm').hide();
 			
 			getAttach(g_code);
@@ -179,87 +193,215 @@ label {width:80px; height: 30px; text-align: justify;}
 				});
 			}
 			
+			$(document).on("click",".pageNum", function(){
+				
+				if($(this).attr("listtype")=="listByRegDate"){
+					var curPage = $(this).text();
+					getReviewListByRegDate(g_code,curPage);
+				}
+				if($(this).attr("listtype")=="listByHighStar"){
+					var curPage = $(this).text();
+					getReviewListByHighStar(g_code,curPage);
+				}
+				if($(this).attr("listtype")=="listByLowStar"){
+					var curPage = $(this).text();
+					getReviewListByLowStar(g_code,curPage);
+				}
+			});
+			
+			$(document).on("click","#previous", function() {
+				
+				if($(".pageNum").attr("listtype")=="listByRegDate"){
+					var curPage = $(".active").text();
+					if(curPage-1==0){
+						getReviewListByRegDate(g_code,curPage);
+					}else{
+						getReviewListByRegDate(g_code,curPage-1);
+					}	
+				}
+				if($(".pageNum").attr("listtype")=="listByHighStar"){
+					var curPage = $(".active").text();
+					if(curPage-1==0){
+						getReviewListByHighStar(g_code,curPage);
+					}else{
+						getReviewListByHighStar(g_code,curPage-1);
+					}	
+				}
+				if($(".pageNum").attr("listtype")=="listByLowStar"){
+					var curPage = $(".active").text();
+					if(curPage-1==0){
+						getReviewListByLowStar(g_code,curPage);
+					}else{
+						getReviewListByLowStar(g_code,curPage-1);
+					}	
+				}
+			});
+			
+			$(document).on("click","#next", function() {
+				
+				if($(".pageNum").attr("listtype")=="listByRegDate"){
+					var curPage = $(".active").text();
+					var nextPage = Number(curPage)+1;
+					if(curPage==finishedPageNum){
+						getReviewListByRegDate(g_code,curPage);
+					}else{
+						getReviewListByRegDate(g_code,nextPage);
+					}	
+				}
+				if($(".pageNum").attr("listtype")=="listByHighStar"){
+					var curPage = $(".active").text();
+					var nextPage = Number(curPage)+1;
+					if(curPage==finishedPageNum){
+						getReviewListByHighStar(g_code,curPage);
+					}else{
+						getReviewListByHighStar(g_code,nextPage);
+					}	
+				}
+				if($(".pageNum").attr("listtype")=="listByLowStar"){
+					var curPage = $(".active").text();
+					var nextPage = Number(curPage)+1;
+					if(curPage==finishedPageNum){
+						getReviewListByLowStar(g_code,curPage);
+					}else{
+						getReviewListByLowStar(g_code,nextPage);
+					}	
+				}
+			});
+			
 			
 			
 			$(document).on("click","#RegDateList", function() {
 				event.preventDefault();
-				
-				$(".underline").removeClass("underline");
-				$("#RegDateList").addClass("underline");
-				$("#reviewList").html("");
-				$.getJSON("/reviews/listByRegDate/"+g_code, function(data) {
-					for(var i=0; i<data.length;i++){
-						var obj = data[i];
-						var msg = listByRegDate(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
-						$("#reviewList").append(msg);
-					}
-				});
+				getReviewListByRegDate(g_code,1);
+				if($('#listPage').css('display') == 'none'){
+		            $('#listPage').show();
+		        }
 			});
 			
-			function getReviewListByRegDate(g_code) {
-				$.getJSON("/reviews/listByRegDate/"+g_code, function(data) {
-					$("#maxReview").text(data.length);
+			$(document).on("click","#highStarList", function() {
+				event.preventDefault();
+				getReviewListByHighStar(g_code,1);
+				if($('#listPage').css('display') == 'none'){
+		            $('#listPage').show();
+		        }
+			});
+			
+			$(document).on("click","#lowStarList", function() {
+				event.preventDefault();
+				getReviewListByLowStar(g_code,1);
+				if($('#listPage').css('display') == 'none'){
+		            $('#listPage').show();
+		        }
+			});
+			
+			var finishedPageNum = '';
+			
+			function getReviewListByRegDate(g_code,curPage) {
+				
+				$.getJSON("/reviews/getAmount/"+g_code,function(data){
+					$("#reviewsAmount").text(data);
+				});
+
+				$.getJSON("/reviews/listByRegDate/"+g_code+"/"+curPage, function(to) {
+					$("#pageNum").html("");
+					var page = '';
+					finishedPageNum = to['finishedPageNum'];
+					for(var i=to['beginPageNum']; i<to['finishedPageNum']+1; i++){
+						if(i == curPage){
+							page = activePage(g_code, i, 'listByRegDate');
+						}else{
+							page = pageJSP(g_code, i, 'listByRegDate');
+						}
+						$("#pageNum").append(page);
+						
+					}
+
 					$(".underline").removeClass("underline");
 					$("#RegDateList").addClass("underline");
 					$("#reviewList").html("");
-					for(var i=0; i<data.length;i++){
-						var obj = data[i];
-						var msg = listByRegDate(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
+					var reviewList = to['list'];
+					for(var i=0; i<reviewList.length;i++){
+						var obj = reviewList[i];
+						var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
 						$("#reviewList").append(msg);
 					}
-					$("#starAve").html(stars('${dto.g_starAmount}'));	
+					
+					$("#starAve").html(stars('${dto.g_starAmount}'));
 				});
 			}
 			
 			
-			
-			$(document).on("click","#highStarList", function() {
-				event.preventDefault();
-				
+			function getReviewListByHighStar(g_code,curPage) {
 				$(".underline").removeClass("underline");
 				$("#highStarList").addClass("underline");
 				$("#reviewList").html("");
 				
-				$.getJSON("/reviews/listByHighStar/"+g_code, function(data) {
-					for(var i=0; i<data.length;i++){
-						var obj = data[i];
-						var msg = listByRegDate(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
-						$("#reviewList").append(msg);
+				$.getJSON("/reviews/listByHighStar/"+g_code+"/"+curPage, function(to) {
+					$("#pageNum").html("");
+					var page = '';
+					for(var i=to['beginPageNum']; i<to['finishedPageNum']+1; i++){
+						if(i == curPage){
+							page = activePage(g_code, i, 'listByHighStar');
+						}else{
+							page = pageJSP(g_code, i, 'listByHighStar');
+						}
+						$("#pageNum").append(page);
 					}
+					var reviewList = to['list'];
+					for(var i=0; i<reviewList.length;i++){
+						var obj = reviewList[i];
+						var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
+						$("#reviewList").append(msg);
+					} 
 				});
-			});
+			}
 			
-			
-			$(document).on("click","#lowStarList", function() {
-				event.preventDefault();
-				
+			function getReviewListByLowStar(g_code,curPage) {
 				$(".underline").removeClass("underline");
 				$("#lowStarList").addClass("underline");
 				$("#reviewList").html("");
 				
-				$.getJSON("/reviews/listByLowStar/"+g_code, function(data) {
-					for(var i=0; i<data.length;i++){
-						var obj = data[i];
-						var msg = listByRegDate(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
-						$("#reviewList").append(msg);
+				$.getJSON("/reviews/listByLowStar/"+g_code+"/"+curPage, function(to) {
+					$("#pageNum").html("");
+					var page = '';
+					for(var i=to['beginPageNum']; i<to['finishedPageNum']+1; i++){
+						if(i == curPage){
+							page = activePage(g_code, i, 'listByLowStar');
+						}else{
+							page = pageJSP(g_code, i, 'listByLowStar');
+						}
+						$("#pageNum").append(page);
 					}
+					var reviewList = to['list'];
+					for(var i=0; i<reviewList.length;i++){
+						var obj = reviewList[i];
+						var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
+						$("#reviewList").append(msg);
+					} 
 				});
-			});
+			}
 			
 			$(document).on("click","#myReviewList", function() {
 				event.preventDefault();
-				
-				$(".underline").removeClass("underline");
-				$("#myReviewList").addClass("underline");
-				$("#reviewList").html("");
-				
-				$.getJSON("/reviews/listById/"+g_code+"/"+'${login.m_id}', function(data) {
-					for(var i=0; i<data.length;i++){
-						var obj = data[i];
-						var msg = listByRegDate(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
-						$("#reviewList").append(msg);
-					}
-				});
+				var userId = '${login.m_id}';
+				if(!userId){
+					alert("로그인 후 확인 하실 수 있습니다.");
+				}else{
+					$(".underline").removeClass("underline");
+					$("#myReviewList").addClass("underline");
+					$("#reviewList").html("");
+					
+					$("#listPage").hide();
+					
+					$.getJSON("/reviews/listById/"+g_code+"/"+'${login.m_id}', function(data) {
+						for(var i=0; i<data.length;i++){
+							var obj = data[i];
+							var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
+							$("#reviewList").append(msg);
+						}
+					});
+				}	
+
 			});
 			
 			
@@ -338,7 +480,7 @@ label {width:80px; height: 30px; text-align: justify;}
 					dataType : 'text',
 					success : function(result) {
 						
-						getReviewListByRegDate(g_code);
+						getReviewListByRegDate(g_code,1);
 					}
 				}); 
 				
@@ -378,7 +520,7 @@ label {width:80px; height: 30px; text-align: justify;}
 						dataType : 'text',
 						success : function(result) {
 							alert("삭제되었습니다.");
-							getReviewListByRegDate(g_code);
+							getReviewListByRegDate(g_code,1);
 						}
 					}); 
 				}

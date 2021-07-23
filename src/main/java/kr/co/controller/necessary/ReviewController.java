@@ -5,12 +5,14 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.dto.PageTO;
 import kr.co.dto.ReviewDTO;
 import kr.co.service.review.ReviewService;
 
@@ -35,21 +37,56 @@ public class ReviewController {
 	}
 	
 	// list.GET
-	@RequestMapping(value = "/listByRegDate/{r_code}", method = RequestMethod.GET)
-	public List<ReviewDTO> listByRegDate(@PathVariable("r_code") String r_code) {
-		return rService.listByRegDate(r_code);
+	@RequestMapping(value = "/listByRegDate/{r_code}/{curPage}", method = RequestMethod.GET)
+	public PageTO<ReviewDTO> listByRegDate(@PathVariable("r_code") String r_code, @PathVariable("curPage") Integer curPage) {
+		
+		int amount = rService.getAmount(r_code);
+		PageTO<ReviewDTO> to = new PageTO<ReviewDTO>(curPage);
+		to.setAmount(amount);
+		to.setPerPage(5);
+		
+		List<ReviewDTO> list = rService.listByRegDate(r_code,to.getStartNum(),to.getPerPage());
+		to.setList(list);
+		
+		return to;
 	}
 	
-	// list.GET
-	@RequestMapping(value = "/listByHighStar/{r_code}", method = RequestMethod.GET)
-	public List<ReviewDTO> listByHighStar(@PathVariable("r_code") String r_code) {
-		return rService.listByHighStar(r_code);
+	@RequestMapping(value = "/listByHighStar/{r_code}/{curPage}", method = RequestMethod.GET)
+	public PageTO<ReviewDTO> listByHighStar(@PathVariable("r_code") String r_code, @PathVariable("curPage") Integer curPage) {
+		
+		int amount = rService.getAmount(r_code);
+		PageTO<ReviewDTO> to = new PageTO<ReviewDTO>(curPage);
+		to.setAmount(amount);
+		to.setPerPage(5);
+		
+		List<ReviewDTO> list = rService.listByHighStar(r_code,to.getStartNum(),to.getPerPage());
+		to.setList(list);
+		
+		return to;
 	}
-
-	// list.GET
-	@RequestMapping(value = "/listByLowStar/{r_code}", method = RequestMethod.GET)
-	public List<ReviewDTO> listByLowStar(@PathVariable("r_code") String r_code) {
-		return rService.listByLowStar(r_code);
+	
+	@RequestMapping(value = "/listByLowStar/{r_code}/{curPage}", method = RequestMethod.GET)
+	public PageTO<ReviewDTO> listByLowStar(@PathVariable("r_code") String r_code, @PathVariable("curPage") Integer curPage) {
+		
+		int amount = rService.getAmount(r_code);
+		PageTO<ReviewDTO> to = new PageTO<ReviewDTO>(curPage);
+		to.setAmount(amount);
+		to.setPerPage(5);
+		
+		List<ReviewDTO> list = rService.listByLowStar(r_code,to.getStartNum(),to.getPerPage());
+		to.setList(list);
+		
+		return to;
+	}
+	
+	@RequestMapping(value = "/getAmount/{r_code}", method = RequestMethod.GET)
+	public int getAmount(@PathVariable("r_code") String r_code) {
+		return rService.getAmount(r_code);
+	}
+	
+	@RequestMapping(value = "/listById/{r_code}/{r_id}", method = RequestMethod.GET)
+	public List<ReviewDTO> listById(@PathVariable("r_code") String r_code, @PathVariable("r_id") String r_id) {
+		return rService.listById(r_code, r_id);
 	}
 	
 	// update.PUT
@@ -65,11 +102,6 @@ public class ReviewController {
 		ReviewDTO dto = new ReviewDTO(r_num, null, r_code, r_star, null, r_content, null, null, r_title);
 		
 		rService.update(dto);
-	}
-	
-	@RequestMapping(value = "/listById/{r_code}/{r_id}", method = RequestMethod.GET)
-	public List<ReviewDTO> listById(@PathVariable("r_code") String r_code, @PathVariable("r_id") String r_id) {
-		return rService.listById(r_code, r_id);
 	}
 
 	// delete.GET
