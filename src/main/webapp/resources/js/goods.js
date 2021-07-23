@@ -124,9 +124,8 @@ function checkImageType(filename){
 }	
 
 function list(r_num, r_id, r_code, r_star, r_regDate, r_title, r_content, userId, r_updateDate){
-	var update = '';
 	if(r_updateDate !== null){
-		update = `수정됨 : ${r_updateDate}`;
+		r_regDate = r_updateDate;
 	}
 	
 	var m = '';
@@ -139,9 +138,9 @@ function list(r_num, r_id, r_code, r_star, r_regDate, r_title, r_content, userId
 	var star = stars(r_star);
 	var msg = `
 	<div r_num='${r_num}' r_code='${r_code}' r_id='${r_id}' r_content='${r_content}' r_title="${r_title}">
-	    ${star} ${r_id} ${r_regDate} ${update}  &nbsp ${m} <br>
-        <div style="font-weight: bold;" >${r_title}</div>
-        ${r_content}<br>
+	    ${star} ${r_id} ${r_regDate}   &nbsp ${m} <br>
+        <a href="#${r_num}" style="font-weight: bold;" data-toggle="collapse" >${r_title}</a>
+       <div id="${r_num}" class="callapse">${r_content}</div>
 	</div>
 	<hr>
 	`;

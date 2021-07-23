@@ -28,6 +28,7 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public List<ReviewDTO> listByRegDate(String r_code, int startNum, int perPage) {
 		return rDao.listByRegDate(r_code, startNum, perPage);
+		
 	}
 
 	@Override

@@ -37,7 +37,6 @@ label {width:80px; height: 30px; text-align: justify;}
 	</div>
 	<div class="read">
 		
-		
 		<div class="thumbnailView">
 			<img src="/resources/img/product/thumbnail/_s_${dto.g_code}.png"> <!-- 임시 -->
 		</div>
@@ -116,6 +115,7 @@ label {width:80px; height: 30px; text-align: justify;}
 	        <input id="r_content">
 	        
 	        <button id="reviewSubmit">리뷰입력</button>
+	        
 	    </div>
 	    
 	    <div id="reviewList"></div>
@@ -128,6 +128,7 @@ label {width:80px; height: 30px; text-align: justify;}
 		        </ul>
 	        </nav>
 	    </div>
+	    
 	    
 	    
 	    
@@ -320,9 +321,16 @@ label {width:80px; height: 30px; text-align: justify;}
 					$("#RegDateList").addClass("underline");
 					$("#reviewList").html("");
 					var reviewList = to['list'];
+					
+					
+					
 					for(var i=0; i<reviewList.length;i++){
 						var obj = reviewList[i];
-						var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
+						var updateDate = obj['r_updateDate'];
+						if(updateDate){
+							updateDate = updateDate.substring(0,10);
+						}
+						var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'].substring(0,10), obj['r_title'], obj['r_content'], '${login.m_id}', updateDate );
 						$("#reviewList").append(msg);
 					}
 					
@@ -350,7 +358,11 @@ label {width:80px; height: 30px; text-align: justify;}
 					var reviewList = to['list'];
 					for(var i=0; i<reviewList.length;i++){
 						var obj = reviewList[i];
-						var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
+						var updateDate = obj['r_updateDate'];
+						if(updateDate){
+							updateDate = updateDate.substring(0,10);
+						}
+						var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'].substring(0,10), obj['r_title'], obj['r_content'], '${login.m_id}', updateDate );
 						$("#reviewList").append(msg);
 					} 
 				});
@@ -375,7 +387,11 @@ label {width:80px; height: 30px; text-align: justify;}
 					var reviewList = to['list'];
 					for(var i=0; i<reviewList.length;i++){
 						var obj = reviewList[i];
-						var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
+						var updateDate = obj['r_updateDate'];
+						if(updateDate){
+							updateDate = updateDate.substring(0,10);
+						}
+						var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'].substring(0,10), obj['r_title'], obj['r_content'], '${login.m_id}', updateDate );
 						$("#reviewList").append(msg);
 					} 
 				});
@@ -396,7 +412,11 @@ label {width:80px; height: 30px; text-align: justify;}
 					$.getJSON("/reviews/listById/"+g_code+"/"+'${login.m_id}', function(data) {
 						for(var i=0; i<data.length;i++){
 							var obj = data[i];
-							var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'], obj['r_title'], obj['r_content'], '${login.m_id}', obj['r_updateDate']);
+							var updateDate = obj['r_updateDate'];
+							if(updateDate){
+								updateDate = updateDate.substring(0,10);
+							}
+							var msg = list(obj['r_num'], obj['r_id'], obj['r_code'], obj['r_star'], obj['r_regDate'].substring(0,10), obj['r_title'], obj['r_content'], '${login.m_id}', updateDate );
 							$("#reviewList").append(msg);
 						}
 					});
@@ -410,7 +430,6 @@ label {width:80px; height: 30px; text-align: justify;}
 				$(this).addClass("on").prevAll("a").addClass("on");
 				r_star = $(this).attr("value"); 
 				$(this).parent().attr("r_star",r_star);
-				console.log(r_star);
 			});
 			
 			 $("#reviewSubmit").click(function() {
