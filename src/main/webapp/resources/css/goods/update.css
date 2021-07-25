@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+    .full {margin: auto; width: 600px; height: 800px;}
+    
+    .inputArea { margin:10px 0; }
+	select { width:100px; }
+	label { display:inline-block; width : 80px; padding:5px; }
+	input { width:120px; }
+	
+	.update_btn {font-size: large; background: #eafaea; float:right;}
+	.submit {font-size: large; background: #eafaea; float:right; margin-right: 3%;}
+	

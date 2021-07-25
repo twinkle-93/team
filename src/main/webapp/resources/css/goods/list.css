@@ -1,0 +1,41 @@
+@charset "UTF-8";
+    
+  	.title{font-size: 3em; text-align: center; margin: 40px 0;}
+  	.title > a {color: green; text-decoration: none;}
+  	.body{width: 1000px; height:800px; margin: auto; text-align: center; margin-top: 50px;}
+  	.list_btn > button { float: left; margin-bottom: 30px; background-color: green; color: white;}
+  	.list_btn > a {float: right; margin-bottom: 30px; background-color: green; color: white;}
+  
+  	
+  	페이징 부분
+    .pagestyle > .active > a{ background-color: pink; border: 0; }
+	.pagination > .active > a:link{
+		color: black;
+	}
+	.pagination > .active > a:visited{
+		color: black;
+		background-color: #eafaea;
+	}
+	.pagination > li > a:link{
+		background-color: white;
+		color: black;
+	}
+	.pagination > li > a:visited{
+		color: black;
+	}
+	.pagination > .active > a:hover{
+		background-color: white;
+		border: 0;
+	}
+	.pagination > li > a{
+		background-color: white;
+		border: 0;
+	}
+	
+	th{text-align: center;}
+	tr > td > a {color: green; text-decoration: none;}
+	select {width : 60px; height: 30px;margin: 0;}
+	.search {width : 150px; height: 30px;margin: 0;}
+	.submit {background: #eafaea; height:30px;margin-top: 5px;}
+	
+	 
