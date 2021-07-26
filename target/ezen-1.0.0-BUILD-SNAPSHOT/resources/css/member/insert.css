@@ -1,0 +1,19 @@
+@charset "UTF-8";
+	
+	.full {width: 500px; height: 850px; margin: auto;}
+	.title {color:green; font-size: 3em; text-align: center; margin: 10px 0 40px 0;}
+	label {width: 100px; height: 40px; text-align: justify;}
+	#m_gender {width: 20px;}
+	#insertBtn {background: #8cd98c;}
+	.i_form > div > span {font-size: small;}
+	.i_form > button {float: right;}
+	
+	 input[type=password] {font-family:'Malgun gothic', dotum, sans-serif;}
+    ::placeholder{font-family: 'Jeju Gothic', sans-serif;}
+	
+	.i_form {margin-top: 30px; padding: 20px; border-radius: 5%; 
+			position: absolute; width: 500px; height: 730px; z-index: 1;}
+	.i_form::after {width: 500px; height: 730px; content: ""; background: url('/resources/img/note.png'); 
+					position: absolute;  top: 0;  left: 0;  z-index: -1;  opacity: 0.4;}
+	#m_email, #m_adress, #m_detailAdress {width: 200px;}
+	div > input {width: 140px;}

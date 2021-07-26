@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+    .full {margin: auto; width: 600px; height: 1200px;}
+    .title {font-size: 3em; text-align: center; margin:0 0 30px 0;}
+    .inputArea { margin:10px 0; }
+	select { width:100px; }
+	label { display:inline-block; width : 80px; padding:5px; margin-bottom: 10px; text-align: center; }
+	input { width:120px; height: 25px; }
+    select {width:120px; height: 25px;}
+    #thumbnail {margin-right: 28.3%; float: right;}
+    #thumbnailImg{margin-bottom: 10px;}
+    
+   #register_Btn {font-size: large; background: #eafaea; float:right; margin-right: 3%;}
+    
+    

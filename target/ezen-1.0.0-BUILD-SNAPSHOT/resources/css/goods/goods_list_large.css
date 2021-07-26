@@ -1,0 +1,7 @@
+@charset "UTF-8";
+	
+	.category {text-align: center;}
+	#g_category_nav {text-align: center;  width : 500px; float: none;}
+	
+	#g_category_nav > li {display:inline-block; float: none;}
+	.category > #g_category_nav > li > a {margin: 0 10px; width: 100px;}

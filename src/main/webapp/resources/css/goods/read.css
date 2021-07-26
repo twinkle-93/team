@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+    .full {height: 500px; width: 800px; margin: auto;}
+    .r_code {padding: 10px; background: #e6fff9; border-radius: 15%;}
+    .read > div > img  {border-radius : 3%; width: 400px; height: 500px; float: left; margin-right: 50px;}
+    
+    label {width:80px; height: 30px; text-align: justify;}
+    .read > .name > p {font-size: 2.5em; margin: 10px 0 20px 0;}
+    .read > .price {font-size: large; margin-bottom: 20px;} 
+    .read > .size {font-size: small;} 
+    .read > .amount {font-size: small;} 
+    .read > .point {font-size: small;} 
+    .read > div .content {font-size: large;  margin-bottom: 10px;} 
+    
+    .buttonList {text-align: center;}
+    .listBtn {border: none; width: 100px; margin-top: 30px;}    
+    .re_body {width: 800px; height: 900px;margin: auto;}
+    
+    #r_id {border: none; width: 50px;}
+    #reviewInsertForm > div > span > label {width: 60px; height: 20px;}
+    #reviewInsertForm > div > label {width: 60px; height: 20px;}
+    #r_title {width: 434px; border: 2px solid #F5E2DC; }
+    #r_content {width: 650px;  border: 2px solid #F5E2DC;}
+    
+    
+    #r_update_title {width: 434px; border: 2px solid #F5E2DC; }
+    #r_update_content {width: 650px;  border: 2px solid #F5E2DC;}
+    .review_update_commit {margin: 10px 20px 20px 10px;}
+    
+    
+    
+    
