@@ -28,6 +28,8 @@ public class AdminController {
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public ModelAndView login(AdminVO vo, HttpSession session, ModelAndView mav) {
 
+		// 수정 완료
+		
 		// 1)
 		// 여기서 문제점이라 하면, 회원 테이블(목록)이랑 관리자 테이블(목록)이 따로 존재한다는 점이다
 		// 회원 수정과 삭제에서 session을 login을 요구한다
