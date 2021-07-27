@@ -1,0 +1,53 @@
+@charset "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+    /* Remove the navbar's default rounded borders and increase the bottom margin */
+   body {font-family: 'Jeju Gothic', sans-serif;}
+    .jumbotron{background-color: white; padding: 0;}
+    .container{text-align: center; padding: 20px;}
+    .container > div {color: green;}
+    .container > div > a {color: green; font-size: 1em; text-decoration: none;}
+    .container > div > p > a {color: green; font-size: 1em; text-decoration: none;}
+    
+	.container-fluid{background-color: #eafaea; height: 30px;}
+    .navbar {margin-bottom: 0; border-radius: 0; }
+    ul, ol, li { text-decoration: none; list-style:none; margin:0; padding:0; }
+   	
+   	.myMenu{display: inline-block; font-size: 0.8em; color: green;}
+    ul.myMenu > li { display:inline-block;  position:relative; }
+    ul.myMenu > li:hover { background:white; }
+    ul.myMenu > li ul.submenu {  text-align: center; display:none; position:absolute; top:30px; left:0; }
+    ul.myMenu > li:hover ul.submenu { display:block; }
+    ul.myMenu > li ul.submenu > li { display:inline-block; width:100px; background-color: #eafaea; padding : 10px;}
+    ul.myMenu > li ul.submenu > li:hover { background:white; }
+    ul.myMenu > li > a {padding: 5px 10px; color: green;}
+    ul.myMenu > li > ul.submenu > li > a {padding: 5px 10px;  color: green;}
+    
+    .login {float: right;}
+    
+    ul > li a.logo{padding :5px 10px; color: green; font-size: 1em;}
+    ul > li i.fas{color: green; padding :5px 10px;}
+    
+    .full {height: 1000px; width: 800px; margin: auto;}
+    .r_code {padding: 10px; background: #e6fff9; border-radius: 15%;}
+    .read > div > img  {border-radius : 3%; width: 400px; height: 500px; float: left; margin-right: 50px;}
+    
+    .read > .name > p {font-size: 2.5em; margin: 10px 0 20px 0;}
+    .read > .price {font-size: large; margin-bottom: 20px;} 
+    .read > .size {font-size: small;} 
+    .read > .amount {font-size: small;} 
+    .read > .point {font-size: small;} 
+    .read > div .content {font-size: large;  margin-bottom: 10px;} 
+    
+    form > select {width: 50px; height: 25px; margin-right: 5px;}
+    form > div > .btn {margin-top : 30px; width: 150px;}
+    .buttonList{text-align: center; padding-top: 50px;}
+    .buttonList > button {margin: 10px; border: 0; border-radius : 15%; padding: 10px 15px;}
+    .buttonList > #updateBtn {margin: 10px; border: 0; border-radius : 15%; background: #eafaea; padding: 10px 15px;}
+    .buttonList > #deleteBtn {margin: 10px; border: 0; border-radius : 15%; background: #ff6666; padding: 10px 15px;}
+    
+    
+    
+    
+    
+    
+     .footer{text-align: center; margin-bottom: 30px; background-color: #f4f1f1; padding: 20px 0 10px 0;}

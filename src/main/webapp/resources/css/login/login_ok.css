@@ -1,0 +1,5 @@
+@charset "UTF-8";
+ .navbar-nav > li > a {padding : 5px 10px; color: green; font-size: 1em;}
+ .navbar-nav > li > a > i {color: green;}
+
+
