@@ -248,13 +248,7 @@
 			event.preventDefault();
 			
 			var str = '';
-			var file = document.getElementById("uploadedList").value;
 			
-			if (!file) {
-				alert("파일을 넣어주세요.");
-				
-				return ;
-			}
 			$(".delFile").each(function(index) {
 				var filename = $(this).attr("data-filename");
 				str += getFileUploadFilenameInput(index, filename);

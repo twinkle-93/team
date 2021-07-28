@@ -35,5 +35,9 @@ public interface GoodsService {
 	List<GoodsDTO> list_category_large(int startNum, int perPage, String g_category_large);
 
 	List<GoodsDTO> list_category_small(int startNum, int perPage, String g_category_small);
+	
+	List<GoodsDTO> saleList();
+
+	List<GoodsDTO> regList();
 
 }

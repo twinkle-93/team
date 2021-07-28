@@ -142,4 +142,14 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 	}
 
+	@Override
+	public List<GoodsDTO> saleList() {
+		return session.selectList(NAMESPACE+".saleList");
+	}
+
+	@Override
+	public List<GoodsDTO> regList() {
+		return session.selectList(NAMESPACE+".regList");
+	}
+
 }

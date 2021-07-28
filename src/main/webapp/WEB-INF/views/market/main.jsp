@@ -56,69 +56,46 @@
 			Weekly Best <i class="far fa-thumbs-up"></i>
 		</h2>
 	</div>
-	<div style="margin: auto; width: 1260px; height: 2000px; z-index: 5;">
+	<div style="margin: auto; width: 1260px; height: 100%; z-index: 5;">
 		<ul>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/pants1.jpg"
-				onmouseout="this.src='/resources/img/pants1_1.jpg'"
-				onmouseover="this.src='/resources/img/pants1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
+			<!-- 메인 컨트롤러에서 넘겨주자! -->
+			<c:forEach items="${map.saleList}" var="saleGoods">
+				<li style="width: 400px; height: 500px; display: inline-block;">
+					<img id="${saleGoods.g_code}" style="width: 350px; height: 400px; margin: 20px;">
+					<div style="text-align: center;">
+						<p>
+							<a href="/goods/read/${saleGoods.g_code}?curPage=1">${saleGoods.g_name}</a>
+						</p>
+						<p>${saleGoods.g_price}원</p>
+					</div>
+				</li>
+
+				<script type="text/javascript">
+					$(document).ready(function() {
+						getAttachSale();
+						
+						<!-- 이미지 불러오기 -->
+						function getAttachSale() {
+							
+							$.getJSON("/goods/getAttach/${saleGoods.g_code}", function(result) {
+								
+								for(var i=0; i<result.length; i++){
+									/* 상품에 판매량 콜롬을 추가 시켜주고, sql 문에 sale(판매량) desc 내림차순으로 list를 받아서 6개 출력하도록 만든다 */
+									
+									/* 테스트 */
+									console.log(result[i]);
+									
+									var filename = result[i];
+									$("img#${saleGoods.g_code}").attr("src", "/goods/displayFile?filename="+filename);
+										
+								}
+							});
+						};
+					});
+				</script>
+			</c:forEach>
 		</ul>
+		
 		<div
 			style="text-align: center; margin-top: 70px; margin-bottom: 50px;">
 			<h2>
@@ -126,36 +103,35 @@
 			</h2>
 		</div>
 		<ul>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/pants1.jpg"
-				onmouseout="this.src='/resources/img/pants1_1.jpg'"
-				onmouseover="this.src='/resources/img/pants1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
+			<!-- 메인 컨트롤러에서 넘겨주자! -->
+			<c:forEach items="${map.regList}" var="regGoods">
+				<li style="width: 400px; height: 500px; display: inline-block;">
+					<img id="${regGoods.g_code}" style="width: 350px; height: 400px; margin: 20px;">
+					<div style="text-align: center;">
+						<p>
+							<a href="/goods/read/${regGoods.g_code}?curPage=1">${regGoods.g_name}</a>
+						</p>
+						<p>${regGoods.g_price}원</p>
+					</div>
+				</li>
+			
+				<script type="text/javascript">
+					$(document).ready(function() {
+						getAttachReg();
+						
+						<!-- 이미지 불러오기 -->
+						function getAttachReg() {
+							$.getJSON("/goods/getAttach/${regGoods.g_code}", function(result) {
+								for(var i=0; i<result.length; i++){
+									/* 상품에 판매량 콜롬을 추가 시켜주고, sql 문에 sale(판매량) desc 내림차순으로 list를 받아서 6개 출력하도록 만든다 */
+									var filename = result[i];
+									$("img#${regGoods.g_code}").attr("src", "/goods/displayFile?filename="+filename);
+								}
+							});
+						};
+					});
+				</script>
+			</c:forEach>
 		</ul>
 	</div>
 
@@ -180,6 +156,7 @@
 
 			</ul>
 			</div></div>
+			<div class="blank"></div>
 
 	<jsp:include page="../home/footer.jsp"></jsp:include>
 </body>

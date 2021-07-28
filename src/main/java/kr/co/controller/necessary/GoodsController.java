@@ -413,6 +413,7 @@ public class GoodsController {
 
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("to", to);
 		mav.addObject("map", map);
 

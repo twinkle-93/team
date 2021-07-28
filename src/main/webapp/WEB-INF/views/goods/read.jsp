@@ -232,7 +232,7 @@
 			
 			$("#listBtn").click(function(event) {
 				event.preventDefault();
-				location.assign("/goods/list/${curPage}");
+				location.assign("/goods/${goods_list_large}");
 			});
 			
 			$("#updateBtn").click(function(event) {
