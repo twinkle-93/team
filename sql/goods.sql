@@ -19,6 +19,9 @@ g_check number default 0,
 g_point number default 0
 )
 
+// order와 수량 체크를 위해 default 9999로 변경
+alter table goods modify g_amount number default 9999
+
 select * from goods
 
 delete from goods

@@ -292,7 +292,7 @@ public class GoodsController {
 		String uploadPath = sc.getRealPath(this.uploadPath);
 
 		// 테스트
-		System.out.println("uploadPath: " + uploadPath);
+		// System.out.println("uploadPath: " + uploadPath);
 
 		InputStream in = new FileInputStream(uploadPath + filename);
 
@@ -375,7 +375,8 @@ public class GoodsController {
 	}
 
 	// list.large category
-	@RequestMapping(value = "/list/categoryl/{g_category_large}", method = RequestMethod.GET)
+	// 만약, 아우터가 들어갔다면...
+	@RequestMapping(value = "/list/categoryl/{g_category_large}", method = RequestMethod.GET, produces = "text/plain;charset=utf8")
 	public ModelAndView list(@PathVariable("g_category_large") String g_category_large) {
 
 		// 테스트
@@ -388,20 +389,24 @@ public class GoodsController {
 
 		List<GoodsDTO> list = gService.list_category_large(to.getStartNum(), to.getPerPage(), g_category_large);
 		to.setList(list);
-
-		ModelAndView mav = new ModelAndView();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("to", to);
+		
+		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map);
 
 		mav.setViewName("/goods/goods_list_large");
 		return mav;
+		
 	}
 
 	// list.small.category
 	@RequestMapping(value = "/list/categorys/{g_category_small}", method = RequestMethod.GET)
 	public ModelAndView list1(@PathVariable("g_category_small") String g_category_small) {
-		System.out.println("스몰카테고리 goodsctrl");
+
+		// 테스트
+		// System.out.println("스몰카테고리 goodsctrl");
 
 		int curPage = 1;
 		int amount = gService.getAmount();
@@ -411,9 +416,10 @@ public class GoodsController {
 		List<GoodsDTO> list = gService.list_category_small(to.getStartNum(), to.getPerPage(), g_category_small);
 		to.setList(list);
 
-		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("to", to);
+		
+		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map);
 
 		mav.setViewName("/goods/goods_list_large");

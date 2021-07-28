@@ -42,6 +42,7 @@
                <li><a href="/goods/list/categorys/가디건"> 가디건</a></li>
             </ul>
          </c:when>
+         
          <c:when
             test="${g_category_large == '상의' || g_category_small == '티셔츠' ||g_category_small == '블라우스' ||g_category_small == '맨투맨'}">
             <div class="title" style="font-size: 3em; text-align: center; margin-bottom: 20px;">
@@ -53,6 +54,7 @@
                <li><a href="/goods/list/categorys/맨투맨"> 맨투맨</a></li>
             </ul>
          </c:when>
+         
          <c:when
             test="${g_category_large == '하의' || g_category_small == '청바지' ||g_category_small == '슬랙스' ||g_category_small == '치마'}">
             <div class="title" style="font-size: 3em; text-align: center; margin-bottom: 20px;">
@@ -64,6 +66,7 @@
                <li><a href="/goods/list/categorys/치마"> 치마</a></li>
             </ul>
          </c:when>
+         
          <c:when
             test="${g_category_large == '신발' ||g_category_small == '로퍼' ||g_category_small == '샌들'}">
             <div class="title" style="font-size: 3em; text-align: center; margin-bottom: 20px;">
@@ -74,6 +77,7 @@
                <li><a href="/goods/list/categorys/샌들"> 샌들</a></li>
             </ul>
          </c:when>
+         
          <c:when
             test="${g_category_large == '가방' ||g_category_small == '크로스백' ||g_category_small == '토트백' ||g_category_small == '클러치'}">
             <div class="title" style="font-size: 3em; text-align: center; margin-bottom: 20px;">
@@ -92,17 +96,53 @@
 			<ul style="width: 1120px; height: 2000px;margin: auto;">
 				<c:forEach items="${map.to.list}" var="goods">
 				<li style="width: 200px; height: 250px; display: inline-block; margin: 0px 10px 100px 10px;">
-				<img src="/resources/img/pants1.jpg" onmouseout="this.src='/resources/img/pants1_1.jpg'"
-				onmouseover="this.src='/resources/img/pants1.jpg'" style="width: 200px; height: 250px; margin: 0px;">
+				
+				<!-- 수정 -->
+				<!-- <img src="/resources/img/pants1.jpg" onmouseout="this.src='/resources/img/pants1_1.jpg'" onmouseover="this.src='/resources/img/pants1.jpg'" style="width: 200px; height: 250px; margin: 0px;"> -->
+				
+				<img id="${goods.g_code}" src="#" style="width: 200px; height: 250px; margin: 0px;">
+				
 				<div style="text-align: center; margin: 10px;">
-					<p>${goods.g_name}</p>
+					<p><a href="/goods/read/${goods.g_code}?curPage=1">${goods.g_name}</a></p>
 					<p>${goods.g_price}원</p>
-				</div>	
+				</div>
 				</li>
+				
+				
+				<!-- 모든 아우터에 해당하는 값들이 나와야한다 -->
+				
+				<script type="text/javascript" src="/resources/js/goods.js"></script>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						getAttach();
+						
+						<!-- 이미지 불러오기 -->
+						function getAttach() {
+							$.getJSON("/goods/getAttach/${goods.g_code}", function(result) {
+								
+								for(var i=0; i<result.length; i++){
+									var filename = result[i];
+									console.log(filename);
+									
+									/* // 상품명과 상품의 파일명이 같아야만 img에 보이게끔 설정
+									var result_sub = filename.substring(filename.lastIndexOf("_")+1).substring(0,2);
+									console.log(result_sub);
+									
+									/* 제일 마지막 상품의 모습만 보여지게 된다 
+									if(result_sub == "${goods.g_name}")*/ 
+									
+									$("img#${goods.g_code}").attr("src", "/goods/displayFile?filename="+filename);
+								}
+							});
+						};
+					});
+				</script>
 				</c:forEach>
 			</ul>
 		</div>
 	</div>
+	
+	
 	
 	
 <jsp:include page="../home/footer.jsp"></jsp:include>

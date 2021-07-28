@@ -12,8 +12,8 @@ o_regDate DATE default SYSDATE,
 o_zipCode varchar2(50),
 o_adress varchar2(100) NOT NULL,
 o_detailAdress varchar2(100) NOT NULL,
-constraint fk_orders_o_code foreign key(o_code) references goods(g_code),
-constraint fk_orders_o_id foreign key(o_id) references member(m_id)
+constraint fk_orders_o_code foreign key(o_code) references goods(g_code) on delete cascade,
+constraint fk_orders_o_id foreign key(o_id) references member(m_id) on delete cascade
 )
 
 

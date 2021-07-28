@@ -72,6 +72,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			
 			<!-- 검색 기능 구현 -->
 			<form action="/goods/list" method="post">
 				<select name="search_option">
@@ -95,9 +96,6 @@
 			<c:if test="${!empty map.keyword}">
 				<jsp:include page="page_search.jsp"></jsp:include>
 			</c:if>
-			
-			
-			
 		</div>
 	</div>
 

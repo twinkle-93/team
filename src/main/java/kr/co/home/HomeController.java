@@ -1,46 +1,43 @@
 package kr.co.home;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-/**
- * Handles requests for the application home page.
- */
+import kr.co.dto.GoodsDTO;
+import kr.co.service.goods.GoodsService;
 
 @Controller
 public class HomeController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
 	@Inject
-	private ServletContext sc;
+	private GoodsService gService;
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public ModelAndView home() {
 
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		// 판매 순(수정)
+		List<GoodsDTO> saleList = gService.saleList();
 
-		String formattedDate = dateFormat.format(date);
+		// 등록 순(수정)
+		List<GoodsDTO> regList = gService.regList();
 
-		model.addAttribute("serverTime", formattedDate);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("saleList", saleList.subList(0, 6));
+		map.put("regList", regList.subList(0, 6));
 
-		return "/market/main";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("map", map);
+		mav.setViewName("/market/main");
+
+		return mav;
 	}
 
 }

@@ -42,4 +42,11 @@ public interface GoodsDAO {
 
 	List<GoodsDTO> list_category_small(int startNum, int perPage, String g_category_small);
 
+	
+	// 메인 리스트
+	
+	List<GoodsDTO> saleList();
+
+	List<GoodsDTO> regList();
+
 }

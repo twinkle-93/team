@@ -39,11 +39,24 @@
 	
 	
 	
-	
+	<!-- g_num 오름차순 -->
 	<select id="list" resultType="GoodsDTO">
-		select * from goods order by g_num
-		asc
+		select * from goods order by g_num asc
 	</select>
+	
+	
+	<!-- 판매량에 따른 list -->
+	<select id="saleList" resultType="GoodsDTO">
+		select * from goods order by g_amount asc
+	</select>
+	
+	
+	<!-- 등록일자에 따른 list -->
+	<select id="regList" resultType="GoodsDTO">
+		select * from goods order by g_regDate desc
+	</select>
+	
+	
 
 	<select id="read" resultType="GoodsDTO">
 		select * from goods where g_code =

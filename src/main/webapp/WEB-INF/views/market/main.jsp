@@ -16,11 +16,13 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-<link href="/resources/css/main/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<link href="/resources/css/main/home.css" rel="stylesheet"
+	type="text/css">
 </head>
 <body>
-<jsp:include page="../home/main_top.jsp"></jsp:include>
+	<jsp:include page="../home/main_top.jsp"></jsp:include>
 	<div style="width: 100%; height: 550px; z-index: 2;" id="myCarousel"
 		class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
@@ -51,135 +53,125 @@
 		</a>
 	</div>
 
+
+
+	
+	<!-- 1) -->
+	<!-- 판매량에 따른 목록 -->
+
 	<div style="text-align: center; margin-top: 70px; margin-bottom: 50px;">
 		<h2>
 			Weekly Best <i class="far fa-thumbs-up"></i>
 		</h2>
 	</div>
+
 	<div style="margin: auto; width: 1260px; height: 2000px; z-index: 5;">
 		<ul>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/pants1.jpg"
-				onmouseout="this.src='/resources/img/pants1_1.jpg'"
-				onmouseover="this.src='/resources/img/pants1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
+			<!-- 메인 컨트롤러에서 넘겨주자! -->
+			<c:forEach items="${map.saleList}" var="saleGoods">
+				<li style="width: 400px; height: 500px; display: inline-block;">
+					<img id="${saleGoods.g_code}" style="width: 350px; height: 400px; margin: 20px;">
+					<div style="text-align: center;">
+						<p>
+							<a href="/goods/read/${saleGoods.g_code}?curPage=1">${saleGoods.g_name}</a>
+						</p>
+						<p>${saleGoods.g_price}원</p>
+					</div>
+				</li>
+
+				<script type="text/javascript">
+					$(document).ready(function() {
+						getAttachSale();
+						
+						<!-- 이미지 불러오기 -->
+						function getAttachSale() {
+							
+							$.getJSON("/goods/getAttach/${saleGoods.g_code}", function(result) {
+								
+								for(var i=0; i<result.length; i++){
+									/* 상품에 판매량 콜롬을 추가 시켜주고, sql 문에 sale(판매량) desc 내림차순으로 list를 받아서 6개 출력하도록 만든다 */
+									
+									/* 테스트 */
+									console.log(result[i]);
+									
+									var filename = result[i];
+									$("img#${saleGoods.g_code}").attr("src", "/goods/displayFile?filename="+filename);
+										
+								}
+							});
+						};
+					});
+				</script>
+			</c:forEach>
 		</ul>
+
+
+
+		<!-- 2) -->
+		<!-- 등록 순서에 따른 목록 -->
+
+		<!-- function이 먹히질 않는다 -->
+
+
 		<div
 			style="text-align: center; margin-top: 70px; margin-bottom: 50px;">
 			<h2>
 				New Item <i class="far fa-bell"></i>
 			</h2>
 		</div>
+
 		<ul>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/pants1.jpg"
-				onmouseout="this.src='/resources/img/pants1_1.jpg'"
-				onmouseover="this.src='/resources/img/pants1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
-			<li style="width: 400px; height: 500px; display: inline-block;">
-				<img src="/resources/img/outer1.jpg"
-				onmouseout="this.src='/resources/img/outer1_1.jpg'"
-				onmouseover="this.src='/resources/img/outer1.jpg'"
-				style="width: 350px; height: 400px; margin: 20px;">
-				<div style="text-align: center;">
-					<p>파란색 숏팬츠</p>
-					<p>16000원</p>
-				</div>
-			</li>
+			<!-- 메인 컨트롤러에서 넘겨주자! -->
+			<c:forEach items="${map.regList}" var="regGoods">
+				<li style="width: 400px; height: 500px; display: inline-block;">
+					<img id="${regGoods.g_code}" style="width: 350px; height: 400px; margin: 20px;">
+					<div style="text-align: center;">
+						<p>
+							<a href="/goods/read/${regGoods.g_code}?curPage=1">${regGoods.g_name}</a>
+						</p>
+						<p>${regGoods.g_price}원</p>
+					</div>
+				</li>
+			
+				<script type="text/javascript">
+					$(document).ready(function() {
+						getAttachReg();
+						
+						<!-- 이미지 불러오기 -->
+						function getAttachReg() {
+							$.getJSON("/goods/getAttach/${regGoods.g_code}", function(result) {
+								for(var i=0; i<result.length; i++){
+									/* 상품에 판매량 콜롬을 추가 시켜주고, sql 문에 sale(판매량) desc 내림차순으로 list를 받아서 6개 출력하도록 만든다 */
+									var filename = result[i];
+									$("img#${regGoods.g_code}").attr("src", "/goods/displayFile?filename="+filename);
+								}
+							});
+						};
+					});
+				</script>
+			</c:forEach>
 		</ul>
 	</div>
 
- <div id="wrap">
- 	<div id="quick_bg">
- 		<ul id="quick">
+	<div id="wrap">
+		<div id="quick_bg">
+			<ul id="quick">
 
-				<li><a data-toggle="tooltip" title="클릭하시면 공지사항으로 넘어갑니다." 
-				href="/notice/list">
-				<i class="fas fa-exclamation"></i>
+				<li><a data-toggle="tooltip" title="클릭하시면 공지사항으로 넘어갑니다."
+					href="/notice/list"> <i class="fas fa-exclamation"></i>
 				</a></li>
 
 				<li><a data-toggle="tooltip" title="클릭하시면 Q&A로 넘어갑니다."
-				href="qna/listSearch"> 
-				<i class="fas fa-question"></i>
+					href="qna/listSearch"> <i class="fas fa-question"></i>
 				</a></li>
 
 				<li><a data-toggle="tooltip" title="클릭하시면 찜 목록으로 넘어갑니다."
-				href="#">
-				<i class="fas fa-heart"></i>
+					href="#"> <i class="fas fa-heart"></i>
 				</a></li>
 
 			</ul>
-			</div></div>
+		</div>
+	</div>
 
 	<jsp:include page="../home/footer.jsp"></jsp:include>
 </body>

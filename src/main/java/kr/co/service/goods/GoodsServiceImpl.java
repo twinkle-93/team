@@ -117,4 +117,14 @@ public class GoodsServiceImpl implements GoodsService {
 		return gDao.list_category_small(startNum, perPage, g_category_small);
 	}
 
+	@Override
+	public List<GoodsDTO> saleList() {
+		return gDao.saleList();
+	}
+
+	@Override
+	public List<GoodsDTO> regList() {
+		return gDao.regList();
+	}
+
 }

@@ -257,7 +257,7 @@
 			};
 			
 			
-			/* 리뷰페이징처리 */
+			/* 리뷰 페이징처리 */
 			$(document).on("click",".pageNum", function(){
 				
 				if($(this).attr("listtype")=="listByRegDate"){
@@ -545,7 +545,6 @@
 
 			
 			/* 리뷰 수정 */
-			
 			$(document).on("click",".review_update_commit", function() {
 				event.preventDefault();
 				var that = $(this);
