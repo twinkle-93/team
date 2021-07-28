@@ -1,0 +1,17 @@
+@charset "UTF-8";
+	
+	.title {font-size: 3em; text-align: center; margin: 80px 0 40px 0; color: green;}
+	.table {width: 600px; height: 100%; margin: auto; }
+	
+	.nothing {width: 400px; height: 500px; margin: auto; text-align: center;}
+	.nothing > h4 {margin: 50px 0}
+	.nothing > p > .btn {width: 100px;}
+	
+	form {width: 600px; height: 100%; text-align: center;}
+	form > input {float:left; background:#eafaea; margin-bottom: 10px;}
+	tr > th {text-align: center;}
+	div > label {width: 120px; height: 20px; text-align: justify;}
+	td > div > div > span {display:inline-block; width: 80px; height: 20px;}
+	.money {padding-top: 30px; text-align: right;}
+	#goodsListBtn {width: 150px;}
+ 

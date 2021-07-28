@@ -1,0 +1,13 @@
+@charset "UTF-8";
+	
+	.body {width: 600px; height: 850px; margin: auto;}
+    .title {color:green; font-size: 3em; text-align: center; margin: 10px 0 40px 0;}
+	
+	.i_form {width: 600px; height: 600px; margin: 60px 0 0 0;}
+	label {width:50px; height: 40px; text-align: justify;}
+	#n_title {width:545px;}
+	#n_id {width: 150px; border: none;}
+	
+	.i_btn {text-align: right; }
+	.submit {width: 100px; background: #8cd98c;}
+    
