@@ -83,13 +83,47 @@
 			<ul style="width: 1120px; height: 100%;margin: auto;">
 				<c:forEach items="${map.to.list}" var="goods">
 				<li style="width: 200px; height: 250px; display: inline-block; margin: 0px 10px 100px 10px;">
-				<img src="/resources/img/pants1.jpg" onmouseout="this.src='/resources/img/pants1_1.jpg'"
-				onmouseover="this.src='/resources/img/pants1.jpg'" style="width: 200px; height: 250px; margin: 0px;">
-				<div style="text-align: center; margin: 15px;">
-					<a class="g_name" href="/goods/read/${goods.g_code}?curPage=${map.to.curPage}">${goods.g_name}</a>
-					<p class="g_price"><fmt:formatNumber value="${goods.g_price}" pattern="###,###"></fmt:formatNumber> 원</p>
-				</div>	
+				
+				<!-- 수정 -->
+				<!-- <img src="/resources/img/pants1.jpg" onmouseout="this.src='/resources/img/pants1_1.jpg'" onmouseover="this.src='/resources/img/pants1.jpg'" style="width: 200px; height: 250px; margin: 0px;"> -->
+				
+				<img id="${goods.g_code}" src="#" style="width: 200px; height: 250px; margin: 0px;">
+				
+				<div style="text-align: center; margin: 10px;">
+					<p><a href="/goods/read/${goods.g_code}?curPage=1">${goods.g_name}</a></p>
+					<p>${goods.g_price}원</p>
+				</div>
 				</li>
+				
+				
+				<!-- 모든 아우터에 해당하는 값들이 나와야한다 -->
+				
+				<script type="text/javascript" src="/resources/js/goods.js"></script>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						getAttach();
+						
+						<!-- 이미지 불러오기 -->
+						function getAttach() {
+							$.getJSON("/goods/getAttach/${goods.g_code}", function(result) {
+								
+								for(var i=0; i<result.length; i++){
+									var filename = result[i];
+									console.log(filename);
+									
+									/* // 상품명과 상품의 파일명이 같아야만 img에 보이게끔 설정
+									var result_sub = filename.substring(filename.lastIndexOf("_")+1).substring(0,2);
+									console.log(result_sub);
+									
+									/* 제일 마지막 상품의 모습만 보여지게 된다 
+									if(result_sub == "${goods.g_name}")*/ 
+									
+									$("img#${goods.g_code}").attr("src", "/goods/displayFile?filename="+filename);
+								}
+							});
+						};
+					});
+				</script>
 				</c:forEach>
 			</ul>
 		</div>
