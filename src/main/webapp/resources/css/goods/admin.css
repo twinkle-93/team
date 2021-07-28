@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+    ul > li a.a_logo{padding :5px 10px; color: green; font-size: 1em; border-radius: 50%; background-color: #eafaea; width: 110px; height: 110px;}
+    ul.a_but > li {display:inline-block; margin: 15px;}
+    .a_main{margin-top: 100px; height: 600px;}
+   
+   

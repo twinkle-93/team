@@ -1,0 +1,12 @@
+@charset "UTF-8";
+	
+	input[type=password] {font-family:'Malgun gothic', dotum, sans-serif;}
+    ::placeholder{font-family: 'Jeju Gothic', sans-serif;}
+    
+    .body {margin: auto; width: 500px; height: 500px;}
+    .body > div {padding: 30px; background: white; text-align: center;}
+    form > div {margin: auto; border: solid #eafaea; padding: 10px; width: 300px; margin-bottom: 10px;  border-radius: 7%;}
+    #m_id , #m_pw {border: none; width: 250px; height: 50px;}
+    #loginBtn {margin: auto; padding: 10px; width: 300px; background: #eafaea;}
+   
+    .fail {color: red; margin-top: 20px;}
