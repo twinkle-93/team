@@ -1,0 +1,18 @@
+@charset "UTF-8";
+	
+	.body{width: 500px; height: 750px; margin: auto;}
+	
+	.title {font-size: 3em; text-align: center; margin:10px 0 40px 0; color: green;}
+	
+	.r_form {width: 500px; height: 620px; padding: 20px; border-radius: 5%; margin: auto; position: relative; z-index: 1;}
+ 	.r_form::after {width: 500px; height: 620px; content: ""; background: url('/resources/img/note.png');
+ 				    position: absolute; top: 0; left: 0;  z-index: -1;  opacity: 0.4;}
+	
+	label {width:100px; height: 40px; text-align: justify;}
+	.btn {margin: 10px; text-align: center;}
+ 	
+ 		
+    #updateBtn {background: #8cd98c; width: 120px;}
+    #deleteBtn {background: #ff6666;}
+    .r_form > span {display:inline-block; width:300px; white-space: pre-wrap;}
+  

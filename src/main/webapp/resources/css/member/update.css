@@ -1,0 +1,20 @@
+@charset "UTF-8";
+    
+    .body {margin: auto; width: 500px; height: 800px;}
+    .title {color:green; font-size: 3em; text-align: center; margin: 10px 0 40px 0;}
+	
+	.u_form {width: 500px; height: 740px; margin: auto; z-index: 1; padding: 20px; position: absolute;}
+	.u_form::after {width: 500px; height: 740px; content: ""; background: url('/resources/img/note.png');
+					position: absolute; top: 0; left: 0; z-index: -1; opacity: 0.4;}
+    
+    label {width:100px; height: 40px; text-align: justify;}
+	
+	input {width: 140px;}
+    #m_id {border: none;}
+    #m_email, #m_adress, #m_detailAdress {width: 250px;}
+    span {font-size: small;}
+    
+    .u_btn {text-align: center;}
+    #uploadBtn {background: #8cd98c; margin: 10px;}
+    .reset {float: right;}
+    .inputArea { margin:10px 0; }
