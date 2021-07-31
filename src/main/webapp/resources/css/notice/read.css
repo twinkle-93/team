@@ -1,0 +1,16 @@
+@charset "UTF-8";
+    
+    .body {width: 800px; height: 100%; margin: auto;}
+    .title {font-size: 3em; text-align: center; margin: 40px 0; color: green;}
+    
+    .day {float: right;}
+	.n_content {height: 400px;} 
+    label {width: 80px; height: 20px; text-align: justify;}
+	
+	.a_btn {text-align: center;}
+	.m_btn {text-align: center;}
+	.n_list {background: #f4f1f1; color: black; width: 100px;}
+	#update_btn {background: #8cd98c; margin: 0 20px; width: 100px;}
+	#delete_btn {background: #ff6666; width: 100px;}
+	
+	.blank {height: 200px;}

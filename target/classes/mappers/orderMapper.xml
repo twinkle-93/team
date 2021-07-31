@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.order">
+
+    <insert id="insert">
+        INSERT INTO orders (o_id, o_name, o_number, o_code, o_price, o_totalprice,
+        o_zipcode, o_address, o_detailAddress, o_phone, o_memo, o_point, o_discount, o_paymentAmount, o_pointDiscount, o_amount)
+        VALUES (#{orders.o_id}, #{orders.o_name},(select nvl2(max(o_number), max(o_number)+1 ,1) from orders), 
+        #{code}, #{orders.o_price}, #{orders.o_totalprice},
+		#{orders.o_zipcode},#{orders.o_address},#{orders.o_detailAddress},#{orders.o_phone},
+        #{orders.o_memo},#{point}, #{orders.o_discount}, #{orders.o_paymentAmount}, #{orders.o_pointDiscount}, #{amount})
+    </insert>
+    
+    <select id="listById" resultType="OrdersDTO2">
+        select * from orders where o_id = #{m_id} ORDER BY o_number DESC
+    </select>
+    
+    <select id="list" resultType="OrdersDTO2">
+        select * from orders ORDER BY o_number DESC
+    </select>
+    
+    <select id="getAmount" resultType="Integer">
+		select count(o_number) from orders
+	</select>
+
+
+
+</mapper>

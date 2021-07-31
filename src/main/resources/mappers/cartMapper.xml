@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.cart">
+
+	<select id="countCart" resultType="Integer">
+		select count(*) from cart
+		where c_g_code = #{c_g_code} and c_m_id = #{c_m_id}
+	</select>
+
+	<insert id="insert">
+      insert into cart (c_id, c_m_id, c_g_code, c_g_name,
+      c_g_price, c_amount, c_g_point)
+      values ((select nvl2(max(c_id), max(c_id)+1, 1)
+      from cart), #{c_m_id}, #{c_g_code}, #{c_g_name}, #{c_g_price},
+      #{c_amount}, #{c_g_point})
+   </insert> 
+
+	<update id="updateCart">
+		update cart set c_amount = c_amount + #{c_amount}
+		where c_m_id = #{c_m_id} and c_g_code = #{c_g_code}
+	</update>
+	
+	<!-- 단가 * 수량은 list로 받아와야한다 -->
+	<select id="getMoney" resultType="Integer">
+		select g.g_price * c.c_amount
+		from cart c, goods g
+		where c.c_g_code = g.g_code
+		and c.c_m_id =
+		#{c_m_id}
+	</select>
+	
+	<select id="listCart" resultType="CartVO">
+		select * from
+		member m, goods g,
+		cart c
+		where m.m_id = c.c_m_id
+		and g.g_code = c.c_g_code
+		and c.c_m_id =
+		#{c_m_id}
+		order by c.c_id
+	</select>
+
+	<select id="sumMoney" resultType="Integer">
+		select nvl(sum(g.g_price *
+		c.c_amount), 0)
+		from cart c, goods g
+		where c.c_g_code = g.g_code
+		and
+		c.c_m_id = #{c_m_id}
+	</select>
+
+	<update id="modify">
+		update cart set c_amount = #{c_amount}
+		where c_m_id = #{c_m_id} and c_g_code = #{c_g_code}
+	</update>
+
+	<select id="delete">
+		delete from cart where c_id = #{c_id}
+	</select>
+	
+	<delete id="deleteById">
+	    delete from cart where c_m_id = #{c_m_id}
+	</delete>
+
+
+</mapper>

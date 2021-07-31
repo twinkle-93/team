@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.review">
+
+	 <insert id="insert">
+       INSERT INTO review(r_num, r_id, r_code, r_star, r_content, r_title)
+       VALUES ((select nvl2(max(r_num), max(r_num)+1 ,1) from review), #{r_id}, #{r_code}, #{r_star}, #{r_content}, #{r_title})
+    </insert>
+    
+    <select id="listByRegDate" resultType="kr.co.dto.ReviewDTO">
+        SELECT * FROM review WHERE r_code = #{r_code} ORDER BY r_regDate desc
+    </select>
+    
+    <select id="listByHighStar" resultType="kr.co.dto.ReviewDTO">
+        SELECT * FROM review WHERE r_code = #{r_code} ORDER BY r_star desc
+    </select>
+    
+    <select id="listByLowStar" resultType="kr.co.dto.ReviewDTO">
+        SELECT * FROM review WHERE r_code = #{r_code} ORDER BY r_star asc
+    </select>
+    
+    <update id="update">
+        UPDATE review SET r_content=#{r_content}, r_updateDate=	SYSDATE, r_title=#{r_title}, r_star=#{r_star} 
+        WHERE r_num=#{r_num} 
+    </update>
+    
+    <select id="g_starAmount" resultType="Integer">
+        SELECT ROUND(AVG(r_star),2)
+        FROM review WHERE r_code=#{g_code}
+    </select>
+    
+    <select id="listById" resultType="kr.co.dto.ReviewDTO">
+        SELECT * FROM review WHERE r_code = #{r_code} AND r_id = #{r_id}
+    </select>
+    
+    <delete id="delete">
+        DELETE FROM review WHERE r_num = #{r_num}
+    </delete>
+    
+    <select id="getAmount" resultType="integer">
+		SELECT COUNT(r_num) FROM review WHERE r_code=#{r_code}
+	</select>
+</mapper>

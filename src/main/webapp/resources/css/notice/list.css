@@ -1,0 +1,38 @@
+@charset "UTF-8";
+	
+	.body {width: 800px; height: 800px; margin: auto;}
+  	.title{font-size: 3em; text-align: center; margin: 40px 0 20px 0; color: green;}
+  	.table_hei {height: 430px;}
+  	th {text-align: center;}
+  	td {text-align: center;}
+  	.n_title {text-align: justify;}
+  	.a_tag {color: black;}
+	.l_btn {float: right; margin-bottom:20px; background: #8cd98c;; color: black; width: 100px;}  	
+  	.blank {height: 200px;}
+  	.page {text-align: center;}
+  	
+  	
+  	페이징 부분
+	.pagination > .active > a:link{
+		color: black;
+	}
+	.pagination > .active > a:visited{
+		color: black;
+		background-color: #eafaea;
+	}
+	.pagination > li > a:link{
+		background-color: #eafaea;
+		color: black;
+	}
+	.pagination > li > a:visited{
+		color: black;
+	}
+	.pagination > .active > a:hover{
+		background-color: #eafaea;
+		border: 0;
+	}
+	.pagination > li > a{
+		background-color: white;
+		border: 0;
+	}
+	
