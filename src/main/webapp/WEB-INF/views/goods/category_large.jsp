@@ -128,7 +128,10 @@
 				</c:forEach>
 			</ul>
 		</div>
-		<div style="height: 200px;"></div>
+		<div style="margin: auto; text-align: center;">
+		<jsp:include page="category_page_large.jsp"></jsp:include>
+		</div>
+		<div style="height: 100px;"></div>
 	</div>
 	
 	

@@ -39,6 +39,12 @@
 					</li>
 					
 					<li>
+						<a href="/orders/listById/${login.m_id}"><i class="fas fa-clipboard-list"></i>
+						주문목록
+						</a>
+					</li>
+					
+					<li>
 						<a href="/cart/list"><i class="fas fa-shopping-cart"></i>
 						장바구니
 						</a>

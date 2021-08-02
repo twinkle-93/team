@@ -40,7 +40,7 @@ public interface GoodsService {
 
 	List<GoodsDTO> regList();
 	
-	int amountRead(String g_code);
+	int getAmount_largeCategory(String g_category_large);
 
-	void amountUpdate(String g_code, int g_amount);
+	int getAmount_SmallCategory(String g_category_small);
 }

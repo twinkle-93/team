@@ -25,7 +25,7 @@
 				<a class="l_btn btn" href="/notice/insert">작성</a>
 			</c:when>
 		</c:choose>
-	
+	<div class="table_hei">
 		<table class="table">
 			<thead>
 				<tr>
@@ -52,6 +52,7 @@
 			<!-- 목록 끝 -->
 			 </tbody>
 		</table>
+		</div>
 		<div class="page">
 			<jsp:include page="page.jsp"></jsp:include>
 		</div>

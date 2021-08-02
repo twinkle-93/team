@@ -90,4 +90,9 @@ public class MemberServiceImpl implements MemberService {
 		mDao.moneyUpdate(m_id, m_money);
 	}
 
+	@Override
+	public int couponRead(String m_id) {
+		return mDao.couponRead(m_id);
+	}
+
 }

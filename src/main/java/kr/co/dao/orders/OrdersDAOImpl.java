@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.dto.OrdersDTO;
+import kr.co.dto.OrdersDTO2;
 
 @Repository
 public class OrdersDAOImpl implements OrdersDAO{
@@ -35,7 +36,13 @@ public class OrdersDAOImpl implements OrdersDAO{
 	}
 	
 	@Override
-	public List<OrdersDTO> listById(String m_id) {
+	public List<OrdersDTO2> listById(String m_id) {
 		return session.selectList(NAMESPACE+".listById", m_id);
 	}
+	
+	@Override
+	public List<OrdersDTO2> list() {
+		return session.selectList(NAMESPACE+".list");
+	}
+
 }

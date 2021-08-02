@@ -1,0 +1,4 @@
+@charset "UTF-8";
+	.body {width:1000px; height: 100%; margin: auto;}
+	.t_body {height: 90%; text-align: center;}
+	.table > thead > tr > th {text-align: center;}

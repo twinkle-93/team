@@ -183,6 +183,64 @@ function activePage(g_code, curPage, listType){
 	var msg =`<a listType=${listType} class="pageNum active" g_code=${g_code}>${curPage}</a>`;
 	return msg;
 }
+/*답글 목록*/
+function replyList(qna_reply_num, qna_reply_id, qna_reply_content, qna_reply_updateDate, m_id, a_id) {
+   const data = new Date(qna_reply_updateDate);
+   const year = data.getFullYear();
+   const month = data.getMonth() + 1;
+   const date = data.getDate();
+   var dat = `${year}년 ${month}월 ${date}일`;
+   
+   const hours = data.getHours();
+   const minutes = data.getMinutes();
+   var dat1 = `${hours}시 ${minutes}분`;
+   
+   var fix = ``;
 
+   if (m_id == qna_reply_id && a_id == "") {
+      fix = `   <a class="btn btn-warning btn-xs reply_btn_update_form">수정</a>
+            <a class="btn btn-danger btn-xs reply_btn_delete">삭제</a>
+   `;
+   }
+   if (a_id != "") {
+      fix = `   <a class="btn btn-warning btn-xs reply_btn_update_form">수정</a>
+            <a class="btn btn-danger btn-xs reply_btn_delete">삭제</a>
+   `;
+   }
+   var msg = `
+      <divclass = "replylist">
+         
+         <div qna_reply_num ='${qna_reply_num}' qna_reply_id='${qna_reply_id}' qna_reply_content='${qna_reply_content}' qna_reply_updateDate='${qna_reply_updateDate}'>
+            
+            ${dat}
+               ${dat1}
+            <input id="qna_reply_num" value="${qna_reply_num}" type="hidden">
+            <span id="qna_reply_id">
+            <label>작성자</label>
+            ${qna_reply_id}</span>
+			<br>
+            <span id="qna_reply_content">${qna_reply_content}</span><br><br>
+            <input type="hidden" id="qna_reply_updateDate" value="${qna_reply_updateDate}">
+      
+               ${fix}
+         </div>
+            
+      </div><br>
+   <hr/>
+   `;
+   return msg;
+}
+/*답글 수정폼*/
+function replyUpdate(qna_reply_num, qna_reply_id, qna_reply_content) {
+	var msg = `
+	    <h4 style="display:inline;">답글수정</h4> &nbsp <a class="btn btn-warning btn-xs reply_update_commit">수정완료</a><br>
+        	<input id="qna_reply_update_num" type="hidden" value="${qna_reply_num}">
+        <label for="qna_reply_update_id">작성자</label>
+        	<input id="qna_reply_update_id" value="${qna_reply_id}" readonly> <br>
+        <label for="qna_reply_update_content">내용</label>
+        	<input id="qna_reply_update_content" value="${qna_reply_content}">
+	`;
+	return msg;
+}
 
 

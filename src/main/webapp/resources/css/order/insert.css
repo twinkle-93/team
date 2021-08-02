@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+	form > div > label {width: 90px; text-align: justify; padding: 5px 0;}
+	form > label {width: 90px; text-align: justify; padding: 5px 0;}
+	.table>thead>tr>th {text-align: center; padding: 5px 0;}
+	.table>tbody>tr>td {text-align: center;}
+	.money {float: right;}
+	.money > div > label {text-align: left; width: 130px;}
+	.money > div > span {display: inline-block; width: 110px; text-align: right;}
+	.table > tbody > tr {height: 40px;}
+	#o_address, #o_detailAddress, #o_memo {width: 500px; margin: 5px 0;}
+	form > span {color: #8C8C8C;}
+	
+	.table-bordered {width: 100%; text-align: center; margin: 20px 0;}
+	.table-bordered > thead > tr > th {background:#f9f9f9; text-align: center; width: 320px; padding: 10px;}
+	.table-bordered > tbody > tr > td {padding: 10px;}
+	.table-bordered > tbody > tr > td > input {text-align: center; width: 100px; border: 0px; outline: none;}
+	
+	
+	
+	.order_btn {text-align: center; margin: 50px 10px;}
+	.order_btn > .btn { margin: 0 10px;}
+	#goodOrdersBtn {font-size:large;  background: #8cd98c; width: 200px; height: 50px; margin-left: 10%;}
+	#goodsCartBtn {float: right;}
+	.blank {height: 200px;}
+	
+	.coupon_border {padding: 15px 10px; border: 3px solid #C8CCCC; margin-bottom: 30px;}
+	#coupon {background: white;}
+	#couponList {border: 2px solid #C8CCCC; padding: 5px;}
+	.couponList > thead > tr {margin-bottom: 15px;}
+	.couponList > thead > tr > th {text-align: center;}
+	#c_num {width: 100px; text-align: center;}
+	#c_name {width: 100px; text-align: center;}
+	#c_discount {width: 100px; text-align: center;}
+	#c_totalPrice {width: 100px; text-align: center;}
+	#c_availavle {width: 100px; text-align: center;}
+	#couponClick {background: white; text-align: center;}
+	#pointDiscount {border: 1px solid black; width: 100px;}
+	#o_discount, #o_paymentAmount {text-align: right; width: 60px;}

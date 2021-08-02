@@ -10,7 +10,7 @@
 	</insert>
 	
 	<select id="list" resultType="NoticeDTO">
-		SELECT * FROM notice ORDER BY n_num asc
+		SELECT * FROM notice ORDER BY n_num desc
 	</select>
 	
 	<select id="read" resultType="NoticeDTO">

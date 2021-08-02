@@ -13,9 +13,17 @@
         #{orders.o_memo},#{point}, #{orders.o_discount}, #{orders.o_paymentAmount}, #{orders.o_pointDiscount}, #{amount})
     </insert>
     
-    <select id="listById" resultType="ordersDTO">
-        select * from orders where o_id = #{m_id}
+    <select id="listById" resultType="OrdersDTO2">
+        select * from orders where o_id = #{m_id} ORDER BY o_number DESC
     </select>
+    
+    <select id="list" resultType="OrdersDTO2">
+        select * from orders ORDER BY o_number DESC
+    </select>
+    
+    <select id="getAmount" resultType="Integer">
+		select count(o_number) from orders
+	</select>
 
 
 

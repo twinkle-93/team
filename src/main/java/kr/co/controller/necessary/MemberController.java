@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -228,33 +229,36 @@ public class MemberController {
 	}
 
 	// loginGET.GET
-	@RequestMapping(value = "/loginGet", method = RequestMethod.GET)
-	public void login() {
+		@RequestMapping(value = "/loginGet", method = RequestMethod.GET)
+		public void login(HttpSession session) {
 
-		// loginGet.jsp로 이동
+			// 관리자 -> 일반회원 세션 삭제
+			session.invalidate();
+			
+			// loginGet.jsp로 이동
 
-	}
+		}
 
-	// 컨트롤러 사용 이전에 인터셉터가 먼저 실행된다
-	// loginPOST.POST
-	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public void login(LoginVO vo, Model model, RedirectAttributes rttr) {
+		// 컨트롤러 사용 이전에 인터셉터가 먼저 실행된다
+		// loginPOST.POST
+		@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
+		public void login(LoginVO vo, Model model, RedirectAttributes rttr) {
 
-		MemberDTO dto = (MemberDTO) mService.login(vo);
-		
-		// 로그인 관련 (로그인 정보가 틀렸을때)
-		// rttr.addFlashAttribute("msg", false);
-		
-		model.addAttribute("login", dto);
-	}
+			MemberDTO dto = (MemberDTO) mService.login(vo);
+			
+			// 로그인 관련 (로그인 정보가 틀렸을때)
+			// rttr.addFlashAttribute("msg", false);
+			
+			model.addAttribute("login", dto);
+		}
 
-	// logout.GET
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) {
-		
-		session.invalidate();
-		return "redirect:/";
-	}
+		// logout.GET
+		@RequestMapping(value = "/logout", method = RequestMethod.GET)
+		public String logout(HttpSession session) {
+			
+			session.invalidate();
+			return "redirect:/";
+		}
 	
 	//m_point update
 	@RequestMapping(value = "/pointUpdate/{m_id}/{m_point}", method = RequestMethod.GET)
@@ -276,5 +280,11 @@ public class MemberController {
 	public void moneyUpdate(@PathVariable("m_id") String m_id, @PathVariable("m_money") int m_money) {
 		mService.moneyUpdate(m_id, m_money);
 	}
+	//m_coupon read
+	@RequestMapping(value = "/couponRead/{m_id}", method = RequestMethod.GET)
+	@ResponseBody
+	public int couponRead(@PathVariable("m_id") String m_id) {
+		return mService.couponRead(m_id);
+	}	
 
 }

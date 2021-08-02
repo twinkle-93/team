@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-    .r_body {height: 700px; width: 800px; margin: auto;}
+    .r_body {height: 100%; width: 800px; margin: auto; margin-bottom: 50px;}
     .r_code {padding: 10px; background: #e6fff9; border-radius: 15%;}
     .read > div > img  {border-radius : 3%; width: 400px; height: 500px; float: left; margin-right: 50px;}
     
@@ -12,12 +12,13 @@
     .read > .point {font-size: small;} 
     .read > div .content {font-size: large;  margin-bottom: 10px;} 
     
-    .buttonList {text-align: center;  margin-top: 30px;}
+    .buttonList {text-align: left;}
     .listBtn { width: 100px; margin: 10px;}
     .updateBtn {width: 100px; margin: 10px; background: #8cd98c; } 
     .deleteBtn {width: 100px; margin: 10px; background: #ff6666;}
-        
-    .re_body {width: 800px; height: 100%;margin: auto;}
+    .c_buts {width: 800px; margin: auto; height: 100px;}
+    .re_body {width: 800px; height: 100%;margin: auto; margin-top: 50px;}
+    .c_form {float: right; margin:10px 50px 50px 0; }
     
     #r_id {border: none; width: 50px;}
     #reviewInsertForm > div > span > label {width: 60px; height: 20px;}

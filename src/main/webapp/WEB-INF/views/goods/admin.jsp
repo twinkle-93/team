@@ -49,14 +49,14 @@
 						
 				</a></li>
 				
-				<li><a class="a_logo" href="#">
+				<li><a class="a_logo" href="/qna/list">
 				<br><br>&nbsp;Q&A<i class="fas fa-question"></i> 
 						
 				</a></li>
 				
-				<li><a class="a_logo" href="#">
+				<li><a class="a_logo" href="/orders/list">
 				<br><br>&nbsp;
-						X
+						주문목록
 				</a></li>
 			</ul>
 	</div>

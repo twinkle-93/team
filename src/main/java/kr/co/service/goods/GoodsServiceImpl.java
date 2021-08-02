@@ -128,14 +128,13 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
-	public int amountRead(String g_code) {
-		return gDao.amountRead(g_code);
+	public int getAmount_largeCategory(String g_category_large) {
+		return gDao.getAmount_largeCategory(g_category_large);
 	}
 	
 	@Override
-	public void amountUpdate(String g_code, int g_amount) {
-		gDao.amountUpdate(g_code, g_amount);
-		
+	public int getAmount_SmallCategory(String g_category_small) {
+		return gDao.getAmount_SmallCategory(g_category_small);
 	}
 
 }

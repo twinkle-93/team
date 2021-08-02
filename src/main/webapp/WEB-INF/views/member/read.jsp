@@ -23,7 +23,6 @@
 	<div class="body">
 	<form class="r_form">
 	<div class="title">회원 상세정보 <i class="fas fa-search"></i></div>
-	
 		<label>아이디</label> ${dto.m_id}<br>
 		
 		<label>이름</label> ${dto.m_name}<br>

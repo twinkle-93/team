@@ -37,5 +37,7 @@ public interface MemberService {
 
 	void moneyUpdate(String m_id, int m_money);
 
+	int couponRead(String m_id);
+
 
 }

@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+	.body {width: 800px; height: 100%;  margin: auto;}
+	.title {font-size: 3em; text-align: center; margin: 40px 0; color: green;}
+	label {width:80px; height: 30px; text-align: justify;}
+	 .day {float: right;}
+	.qna_content {height: 400px;} 	
+	
+	
+	#replyInsertForm {margin: 20px 0; border: 3px solid #f4f1f1; padding: 10px;}
+	 #reviewInsertForm > div > span > label {width: 60px; height: 20px;}
+    #reviewInsertForm > div > label {width: 60px; height: 20px;}
+    .qna_reply_content_insert {width: 650px;  border: 2px solid #f4f1f1;}
+	#qna_reply_id {border: none; outline: none;}
+	#replySubmit {border: 1px solid black; background: black; color: white; padding: 10px; width: 100px; margin-top: 3px;}
+	
+	#qnareply {border: 1px solid black; background: black; padding: 10px; color: white;}
+	#replyList {height: 100%; width: 800px; margin: auto;}
+	#qna_reply_num {float: left;}
+	#qna_reply_id {float: right;}
+	#qna_reply_id label {width: 50px; height: 30px;}
+	.reply_btn {float: right; margin: 0;}
+	.reply_btn > a {margin: 0;}
+	.blank {height: 100px;}

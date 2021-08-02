@@ -13,13 +13,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<link href="/resources/css/member/login.css"  rel="stylesheet" type="text/css">
+<link href="/resources/css/qna/insert.css"  rel="stylesheet" type="text/css">
 <link href="/resources/css/main/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <jsp:include page="../home/main_top.jsp"></jsp:include>
-<section id="container">
- 
+<div class="boby">
   <form action="/qna/insert" method="post" autocomplete="off">
    <p>
     <label for="qna_title">글 제목</label><input type="text" id="qna_title" name="qna_title" />
@@ -28,15 +27,20 @@
     <label for="qna_content">글 내용</label><textarea id="qna_content" name="qna_content"></textarea>
    </p>
    <p>
-    <label for="qna_id">작성자</label><input type="text" id="qna_id" name="qna_id" />
+    <c:if test="${login.m_id == null}">
+    <label for="qna_id">작성자</label><input type="text" id="qna_id" name="qna_id" value="${admin.a_id}" readonly/>
+   </c:if>
+   <c:if test="${admin.a_id == null}">
+   <label for="qna_id">작성자</label><input type="text" id="qna_id" name="qna_id" value="${login.m_id}" readonly/>
+   </c:if>
    </p>
    <p>
-   <label for="qna_pw">비밀번호</label><input type="text" id="qna_pw" name="qna_pw" />
     <button type="submit">작성</button>
    </p>  
   </form>
-
- </section>
+	
+</div>
+<div class="blank"></div>
 
 <jsp:include page="../home/footer.jsp"></jsp:include>
 </body>

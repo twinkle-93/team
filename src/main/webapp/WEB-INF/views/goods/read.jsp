@@ -96,16 +96,19 @@
 
 				<div>
 					<label class="content">상품소개</label>
-					<p style="height: 144px;">${dto.g_content}</p>
+					<p style="height: 200px;">${dto.g_content}</p>
 				</div>
+			</div>
+		</div>
 
-
+		<div class="c_buts">
 				<!-- 장바구니 폼(테스트) -->
-
-				<form action="/cart/insert" method="post">
+			<div class="c_form">
+				<form  action="/cart/insert" method="post">
 					<input type="hidden" name="c_g_code" value="${dto.g_code}">
 					<input type="hidden" name="c_g_name" value="${dto.g_name}">
 					<input type="hidden" name="c_g_price" value="${dto.g_price}">
+					<input type="hidden" name="c_g_point" value="${dto.g_point}">
 					<select name="c_amount" style="height: 30px;">
 						<c:forEach begin="1" end="10" var="i">
 							<option value="${i}">${i}</option>
@@ -120,9 +123,8 @@
 					</button>
 
 				</form>
-			</div>
+			</div>	
 			<!-- <div id="multipleImgView" style="text-align: center;"></div> -->
-			<br>
 			
 			<c:choose>
 				<c:when test="${!empty admin}">
@@ -132,14 +134,8 @@
 						<button class="btn deleteBtn" id="deleteBtn">삭제</button>
 					</div>
 				</c:when>
-				<c:otherwise>
-					<div class="buttonList">
-						<button class="btn listBtn" id="listBtn">목록</button>
-					</div>
-				</c:otherwise>
 			</c:choose>
-			
-		</div>
+			</div>
 
 
 
@@ -232,7 +228,7 @@
 			
 			$("#listBtn").click(function(event) {
 				event.preventDefault();
-				location.assign("/goods/${goods_list_large}");
+				location.assign("/goods/list");
 			});
 			
 			$("#updateBtn").click(function(event) {
@@ -345,7 +341,7 @@
 			
 			$(document).on("click","#RegDateList", function() {
 				event.preventDefault();
-				getReviewListByRegDate(${dto.g_code},1);
+				getReviewListByRegDate($("#r_code").val(),1);
 				if($('#listPage').css('display') == 'none'){
 		            $('#listPage').show();
 		        }
@@ -353,7 +349,7 @@
 			
 			$(document).on("click","#highStarList", function() {
 				event.preventDefault();
-				getReviewListByHighStar(${dto.g_code},1);
+				getReviewListByHighStar($("#r_code").val(),1);
 				if($('#listPage').css('display') == 'none'){
 		            $('#listPage').show();
 		        }
@@ -361,7 +357,7 @@
 			
 			$(document).on("click","#lowStarList", function() {
 				event.preventDefault();
-				getReviewListByLowStar(${dto.g_code},1);
+				getReviewListByLowStar($("#r_code").val(),1);
 				if($('#listPage').css('display') == 'none'){
 		            $('#listPage').show();
 		        }
@@ -478,16 +474,19 @@
 			$(document).on("click","#myReviewList", function() {
 				event.preventDefault();
 				var userId = '${login.m_id}';
-				if(!userId){
-					alert("로그인 후 확인 하실 수 있습니다.");
-				}else{
-					$(".underline").removeClass("underline");
-					$("#myReviewList").addClass("underline");
-					$("#reviewList").html("");
+				var r_code = $("#r_code").val();
+				
+				 if(!userId){
+		            	alert("로그인(일반회원) 후 이용하실 수 있습니다.");
+		                location.assign("/member/loginGet");
+		            }else{
+		               $(".underline").removeClass("underline");
+		               $("#myReviewList").addClass("underline");
+		               $("#reviewList").html("");
 					
 					$("#listPage").hide();
 					
-					$.getJSON("/reviews/listById/"+${dto.g_code}+"/"+'${login.m_id}', function(data) {
+					$.getJSON("/reviews/listById/"+r_code+"/"+'${login.m_id}', function(data) {
 						for(var i=0; i<data.length;i++){
 							var obj = data[i];
 							var updateDate = obj['r_updateDate'];
@@ -533,7 +532,7 @@
 					success : function(result) {
 						$('#reviewInsertForm').hide();
 						$("#reviewList").html("");
-						getReviewListByRegDate(${dto.g_code}, 1);
+						getReviewListByRegDate($("#r_code").val(), 1);
 						$("#r_content").val("");
 						$("#r_title").val("");
 						location.reload();
@@ -592,6 +591,7 @@
 				var userId = '${login.m_id}';
 				if(!userId){
 					alert("로그인 후 이용하실 수 있습니다.");
+					location.assign("/member/loginGet");
 				}else{
 					$.getJSON("/reviews/listById//${dto.g_code}/${login.m_id}", function(data) {
 						if(data.length>0){
@@ -618,7 +618,7 @@
 						},
 						data: JSON.stringify({
 							r_num : r_num,
-							r_code : ${dto.g_code}
+							r_code : $("#r_code").val()
 						}),
 						dataType : 'text',
 						success : function(result) {

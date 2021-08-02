@@ -10,12 +10,12 @@
 	</select>
 
 	<insert id="insert">
-		insert into cart (c_id, c_m_id, c_g_code, c_g_name,
-		c_g_price, c_amount)
-		values ((select nvl2(max(c_id), max(c_id)+1, 1)
-		from cart), #{c_m_id}, #{c_g_code}, #{c_g_name}, #{c_g_price},
-		#{c_amount})
-	</insert>
+      insert into cart (c_id, c_m_id, c_g_code, c_g_name,
+      c_g_price, c_amount, c_g_point)
+      values ((select nvl2(max(c_id), max(c_id)+1, 1)
+      from cart), #{c_m_id}, #{c_g_code}, #{c_g_name}, #{c_g_price},
+      #{c_amount}, #{c_g_point})
+   </insert> 
 
 	<update id="updateCart">
 		update cart set c_amount = c_amount + #{c_amount}

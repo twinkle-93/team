@@ -118,4 +118,9 @@ public class MemberDAOImpl implements MemberDAO {
 		session.update(NAMESPACE+".moneyUpdate", map);
 		
 	}
+
+	@Override
+	public int couponRead(String m_id) {
+		return session.selectOne(NAMESPACE+".couponRead", m_id);
+	}
 }

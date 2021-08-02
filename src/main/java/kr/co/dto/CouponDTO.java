@@ -2,6 +2,7 @@ package kr.co.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class CouponDTO implements Serializable {
 
@@ -14,21 +15,28 @@ public class CouponDTO implements Serializable {
 	private String c_name;
 	private int c_discount;
 	private Date c_regDate;
-	private Date c_endDate;
 	private int c_totalPrice;
+	private int c_endDate;
 
 	public CouponDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CouponDTO(int c_num, String c_name, int c_discount, Date c_regDate, Date c_endDate, int c_totalPrice) {
+	public CouponDTO(int c_num, String c_name, int c_discount, Date c_regDate, int c_totalPrice, int c_endDate) {
 		super();
 		this.c_num = c_num;
 		this.c_name = c_name;
 		this.c_discount = c_discount;
 		this.c_regDate = c_regDate;
-		this.c_endDate = c_endDate;
 		this.c_totalPrice = c_totalPrice;
+		this.c_endDate = c_endDate;
+	}
+	public int getC_endDate() {
+		return c_endDate;
+	}
+
+	public void setC_endDate(int c_endDate) {
+		this.c_endDate = c_endDate;
 	}
 
 	public int getC_num() {
@@ -63,13 +71,7 @@ public class CouponDTO implements Serializable {
 		this.c_regDate = c_regDate;
 	}
 
-	public Date getC_endDate() {
-		return c_endDate;
-	}
-
-	public void setC_endDate(Date c_endDate) {
-		this.c_endDate = c_endDate;
-	}
+	
 
 	public int getC_totalPrice() {
 		return c_totalPrice;
@@ -85,15 +87,7 @@ public class CouponDTO implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + c_discount;
-		result = prime * result + ((c_endDate == null) ? 0 : c_endDate.hashCode());
-		result = prime * result + ((c_name == null) ? 0 : c_name.hashCode());
-		result = prime * result + c_num;
-		result = prime * result + ((c_regDate == null) ? 0 : c_regDate.hashCode());
-		result = prime * result + c_totalPrice;
-		return result;
+		return Objects.hash(c_num);
 	}
 
 	@Override
@@ -105,34 +99,19 @@ public class CouponDTO implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		CouponDTO other = (CouponDTO) obj;
-		if (c_discount != other.c_discount)
-			return false;
-		if (c_endDate == null) {
-			if (other.c_endDate != null)
-				return false;
-		} else if (!c_endDate.equals(other.c_endDate))
-			return false;
-		if (c_name == null) {
-			if (other.c_name != null)
-				return false;
-		} else if (!c_name.equals(other.c_name))
-			return false;
-		if (c_num != other.c_num)
-			return false;
-		if (c_regDate == null) {
-			if (other.c_regDate != null)
-				return false;
-		} else if (!c_regDate.equals(other.c_regDate))
-			return false;
-		if (c_totalPrice != other.c_totalPrice)
-			return false;
-		return true;
+		return c_num == other.c_num;
 	}
 
 	@Override
 	public String toString() {
 		return "CouponDTO [c_num=" + c_num + ", c_name=" + c_name + ", c_discount=" + c_discount + ", c_regDate="
-				+ c_regDate + ", c_endDate=" + c_endDate + ", c_totalPrice=" + c_totalPrice + "]";
+				+ c_regDate + ", c_totalPrice=" + c_totalPrice + ", c_endDate=" + c_endDate + ", getC_endDate()="
+				+ getC_endDate() + ", getC_num()=" + getC_num() + ", getC_name()=" + getC_name() + ", getC_discount()="
+				+ getC_discount() + ", getC_regDate()=" + getC_regDate() + ", getC_totalPrice()=" + getC_totalPrice()
+				+ ", hashCode()=" + hashCode() + ", getClass()=" + getClass() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
+	
 }
+	

@@ -6,11 +6,11 @@
 	<insert id="insert">
 		insert into member
 		(m_id, m_pw, m_name, m_birth,
-		m_email, m_zipCode, m_adress, m_detailAdress,
+		m_email, m_zipCode, m_address, m_detailAddress,
 		m_phone, m_gender)
 		values
 		(#{m_id}, #{m_pw}, #{m_name}, #{m_birth}, #{m_email}, #{m_zipCode},
-		#{m_adress}, #{m_detailAdress}, #{m_phone}, #{m_gender})
+		#{m_address}, #{m_detailAddress}, #{m_phone}, #{m_gender})
 	</insert>
 
 	<select id="list" resultType="MemberDTO">
@@ -30,8 +30,8 @@
 		m_birth = #{m_birth},
 		m_email = #{m_email},
 		m_zipCode = #{m_zipCode},
-		m_adress = #{m_adress},
-		m_detailAdress = #{m_detailAdress},
+		m_address = #{m_address},
+		m_detailAddress = #{m_detailAddress},
 		m_phone = #{m_phone},
 		m_updateDate = SYSDATE
 		where m_id = #{m_id}
@@ -100,6 +100,10 @@
 	
 	<select id="moneyRead" resultType="Integer">
 	    select m_money from member where m_id = #{m_id}
+	</select>
+	
+	<select id="couponRead" resultType="Integer">
+	    select m_coupon from member where m_id = #{m_id}
 	</select>
 	
 	

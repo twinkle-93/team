@@ -17,8 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.dto.CartVO;
 import kr.co.dto.MemberDTO;
 import kr.co.dto.OrdersDTO;
+import kr.co.dto.OrdersDTO2;
 import kr.co.service.cart.CartService;
-import kr.co.service.goods.GoodsService;
 import kr.co.service.member.MemberService;
 import kr.co.service.orders.OrdersService;
 
@@ -35,8 +35,6 @@ public class OrdersController {
 	@Inject
 	private MemberService mService;
 	
-	@Inject
-	private GoodsService gService;
 	
 	// insert.GET
 	// cart/list 그대로 받아옴
@@ -88,7 +86,7 @@ public class OrdersController {
 
 	// insert.POST
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public void insert(OrdersDTO orders) {
+	public String insert(OrdersDTO orders) {
 		
 		// orders insert
 		oService.insert(orders);
@@ -103,20 +101,30 @@ public class OrdersController {
 		
 		// cart delete
 		cService.deleteById(orders.getO_id());
+		
+		return "redirect:/orders/listById/"+ orders.getO_id();
 
 	}
 
 	// listById.GET 멤버별 orders list
-	@RequestMapping(value = "/list/{m_id}", method = RequestMethod.GET)
-	public List<OrdersDTO> list(@PathVariable("m_id") String m_id) {
-		return oService.listById(m_id);
-	}
-
-	// list.POST
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void list(Model model) {
-
-	}
+		@RequestMapping(value = "/listById/{m_id}", method = RequestMethod.GET)
+		public String listById(@PathVariable("m_id") String m_id, Model model) {
+			
+			List<OrdersDTO2> list = oService.listById(m_id);
+			System.out.println(list);
+			model.addAttribute("list", list);
+			return "/orders/listById";
+		}
+		
+		// orders list
+		@RequestMapping(value = "/list", method = RequestMethod.GET)
+		public List<OrdersDTO2> list(Model model) {
+			
+			List<OrdersDTO2> list = oService.list();
+			model.addAttribute("list", list);
+			
+			return list;
+		}
 
 	// read.GET
 	@RequestMapping(value = "/read", method = RequestMethod.GET)

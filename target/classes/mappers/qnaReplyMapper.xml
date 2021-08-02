@@ -3,5 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.qnareply">
-
+	<insert id="insert">
+	insert into qna_reply
+		(qna_reply_num,
+		qna_about_num,
+		qna_reply_id,
+		qna_reply_content)
+		values
+		((select nvl2(max(qna_reply_num), max(qna_reply_num)+1 , 1 ) from qna_reply),
+		#{qna_about_num},
+		#{qna_reply_id},
+		#{qna_reply_content})
+	</insert>
+	<select id="list" resultType="kr.co.dto.QnaReplyDTO">
+		select * from qna_reply where qna_about_num = #{qna_about_num} order by qna_reply_num asc
+	</select>
+	<update id="update">
+		UPDATE qna_reply SET qna_reply_content = #{qna_reply_content}, qna_reply_id = #{qna_reply_id} WHERE qna_reply_num = #{qna_reply_num}
+	</update>
+	<delete id="delete">
+		delete from qna_reply where qna_reply_num = #{qna_reply_num}
+	</delete>
 </mapper>

@@ -6,14 +6,14 @@
     
     .jumbotron{background-color: white; padding: 0;}
     .container{text-align: center; padding: 20px;}
-    .container > div {color: green;}
-    .container > div > a {color: green; font-size: 1em; text-decoration: none;}
+    .container > div > a {color: green; text-decoration: none;}
+    .container > div > a > span {color: green; font-size: 1em; text-decoration: none;}
     .container > div > p > a {color: green; font-size: 1em; text-decoration: none;}
     
 	.container-fluid{background-color: #eafaea; height: 30px;}
     ul, ol, li { text-decoration: none; list-style:none; margin:0; padding:0; }
    	
-   	.myMenu{display: inline-block; font-size: 0.8em; color: green;}
+   	.myMenu{display: inline-block; font-size: 1em; color: green;}
     ul.myMenu > li { display:inline-block;  position:relative; }
     ul.myMenu > li:hover { background:white; }
     ul.myMenu > li ul.submenu {  text-align: center; display:none; position:absolute; top:30px; left:0; }

@@ -2,7 +2,7 @@
 	
 	.body {width: 800px; height: 800px; margin: auto;}
   	.title{font-size: 3em; text-align: center; margin: 40px 0 20px 0; color: green;}
-  	.table {height: 430px;}
+  	.table_hei {height: 430px;}
   	th {text-align: center;}
   	td {text-align: center;}
   	.n_title {text-align: justify;}

@@ -4,4 +4,95 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.qna">
 
+	<insert id="insert">
+		insert into qna
+		(qna_num,
+		qna_id,
+		qna_title,
+		qna_content)
+		values
+		((select nvl2(max(qna_num), max(qna_num)+1 , 1 ) from qna),
+		#{qna_id},
+		#{qna_title},
+		#{qna_content})
+	</insert>
+
+	<!-- 조회 -->
+
+	<select id="read" resultType="QnaDTO">
+		select * from qna where qna_id = #{qna_id} and qna_num = #{qna_num}
+	</select>
+
+	<!-- 수정 -->
+	<update id="update">
+		update qna
+		set
+		qna_num= #{qna_num},
+		qna_id = #{qna_id},
+		qna_title =
+		#{qna_title},
+		qna_content = #{qna_content}
+		where qna_id = #{qna_id} and qna_num = #{qna_num}
+	</update>
+
+	<!-- 삭제 -->
+	<delete id="delete">
+		delete from
+		qna
+		where qna_id = #{qna_id} and qna_num = #{qna_num}
+	</delete>
+
+
+	<select id="login" resultType="QnaDTO">
+		select * from qna where qna_id =
+		#{qna_id} and qna_pw = #{qna_pw}
+	</select>
+
+	<!-- 목록 -->
+	<select id="list" resultType="QnaDTO">
+		select q.qna_num, q.qna_id, q.qna_title, q.qna_content, q.qna_regDate, q.qna_updateDate,
+		(select COUNT(*) FROM qna_reply WHERE qna_about_num = q.qna_num) as qna_recnt
+		 from qna q order by q.qna_num asc
+
+	</select>
+
+	<select id="getAmount" resultType="Integer">
+		select count(qna_id) from qna
+	</select>
+
+
+	<select id="getAmount_search" resultType="Integer">
+		select count(*) from qna
+		<include refid="search"></include>
+	</select>
+
+
+	<select id="listAll" resultType="QnaDTO">
+		select * from qna
+		<include refid="search"></include>
+		order by qna_num asc
+	</select>
+
+	<select id="getCount" resultType="Integer">
+		select count(*) from qna
+		<include refid="search"></include>
+	</select>
+
+	<sql id="search">
+		<choose>
+			<!-- 전체검색일 경우 -->
+			<when test="search_option == 'all'">
+				where qna_id like '%'||#{keyword}||'%'
+				or qna_title
+				like '%'||#{keyword}||'%'
+				or qna_content like '%'||#{keyword}||'%'
+
+			</when>
+
+			<otherwise>
+				where ${search_option} like '%'||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+
 </mapper>

@@ -38,7 +38,14 @@ public class HomeController {
 		List<GoodsDTO> saleList = gService.saleList();
 
 		// 등록 순(수정)
-		List<GoodsDTO> regList = gService.regList();
+				List<GoodsDTO> regList = gService.regList();
+
+				if (saleList == null || saleList.size() < 6 || regList == null || regList.size() < 6) {
+					ModelAndView mav = new ModelAndView();
+					mav.setViewName("/market/fail");
+					return mav;
+				}
+
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("saleList", saleList.subList(0, 6));

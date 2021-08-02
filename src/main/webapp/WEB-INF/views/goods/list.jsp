@@ -30,7 +30,7 @@
 					<a class="btn" href="/goods/insert">상품등록</a>
 				</div>
 			</c:if>
-			
+			<div class="tab_body">
 			<table class="table" >
 				<thead>
 					<tr>
@@ -72,6 +72,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			</div>
 			<!-- 검색 기능 구현 -->
 			<form action="/goods/list" method="post">
 				<select name="search_option">

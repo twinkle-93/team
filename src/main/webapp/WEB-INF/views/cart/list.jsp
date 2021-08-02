@@ -25,22 +25,23 @@
 			<div class="nothing">
 				<h4>장바구니가 비어있습니다.</h4>
 				<p>물건을 담아보세요!&emsp;
-				<button class="btn" id="goodsListBtn">상품 목록</button></p>
+				<button class="btn" id="goodsListBtn">메인</button></p>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<form action="/cart/update" method="post">
-			<div style="float: right; height: 40px;">
-			<input style=" background: #eafaea;" class="btn" type="submit" value="수정">
+			<div style="float: right; margin: 5px;">
+			<input style=" background: #eafaea;" type="submit" value="수정">
 			</div>
 				<table class="table" >
 					<thead>
 						<tr>
-							<th>상품명</th>
-							<th>단가</th>
-							<th>수량</th>
-							<th>총 금액</th>
-							<th>취소</th>
+							<th style="width: 500px;">상품명</th>
+							<th style="width: 100px;">판매금액</th>
+							<th style="width: 100px;">수량</th>
+							<th style="width: 100px;">적립 포인트</th>
+							<th style="width: 100px;">총 금액</th>
+							<th style="width: 100px;">취소</th>
 						</tr>
 					</thead>
 					
@@ -55,10 +56,13 @@
 								</td>
 								<td>
 									<!-- input -->
-									<input type="number" style="width: 40px" name="c_amount" value="${carts.c_amount}"> 개
+									<input type="number" style="width: 30px;" name="c_amount" value="${carts.c_amount}"> 개
 									
 									<!-- input -->
 									<input type="hidden" name="c_g_code" value="${carts.c_g_code}">
+								</td>
+								<td> ${carts.c_g_point * carts.c_amount} 포인트
+								<input type="hidden" name="c_g_point" value="${carts.c_g_point * carts.c_amount}">
 								</td>
 								<td style="width: 100px" align="right">
 
@@ -70,8 +74,10 @@
 								</td>
 							</tr>
 						</c:forEach>
-							<tr>
-								<td colspan="5">
+					</tbody>
+				</table>
+							
+							
 								<br><p>100,000원 미만 주문시 배송료가 추가됩니다.</p>
 								<div class="money">
 									<div>
@@ -87,15 +93,11 @@
 										<span><fmt:formatNumber pattern="###,###,###" value="${map.allSum}"/> 원</span>
 									</div>	
 								</div>	
-								</td>
-							</tr>
-					</tbody>
-				</table>
+							
 				
 				<!-- input --><br>
 				<input type="hidden" name="c_count" value="${map.count}">
-				<button class="btn" id="goodOrdersBtn">주문 하기</button>
-				<button class="btn" id="goodsListBtn">상품 목록</button>
+				<button class="btn" id="goodOrdersBtn">주문</button>
 			</form>
 		</c:otherwise>
 	</c:choose>
@@ -106,7 +108,7 @@
 		$(document).ready(function() {
 			$("#goodsListBtn").click(function(event) {
 				event.preventDefault();
-				location.assign("/goods/list");
+				location.assign("/");
 			});
 			
 			$(document).ready(function() {

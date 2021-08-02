@@ -47,7 +47,7 @@
 			<mapping path="/member/list"/>
 			<mapping path="/goods/insert"/>
 			<mapping path="/notice/insert"/>
-			<!-- <mapping path="/goods/list"/> -->
+			<mapping path="/goods/list"/>
 			<mapping path="/goods/update/{g_code}"/>
 			<mapping path="/goods/delete/{g_code}"/>
 			<beans:ref bean="adminInterceptor" />

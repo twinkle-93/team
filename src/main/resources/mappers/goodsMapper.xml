@@ -147,12 +147,22 @@
 		SELECT * FROM attach WHERE a_code = #{g_code} and a_bno = #{r_bno}
 	</select>
 	
-	<select id="amountRead" resultType="Integer">
-	    SELECT g_amount FROM goods WHERE g_code = #{g_code}
+	<!-- 카테고리 별 amount -->
+	<select id="getAmount_largeCategory" resultType="Integer">
+		select count(g_code) from goods where g_category_large = #{g_category_large}
 	</select>
 	
-	<update id="amountUpdate">
-	    UPDATE goods SET g_amount = #{g_amount} WHERE g_code=#{g_code}
-	</update>
+	
+	<select id="getAmount_SmallCategory" resultType="Integer">
+		select count(g_code) from goods where g_category_small = #{g_category_small}
+	</select>
+	
+	 <select id="amountRead" resultType="Integer">
+       SELECT g_amount FROM goods WHERE g_code = #{g_code}
+   </select>
+   
+   <update id="amountUpdate">
+       UPDATE goods SET g_amount = #{g_amount} WHERE g_code=#{g_code}
+   </update>
 	
 </mapper>

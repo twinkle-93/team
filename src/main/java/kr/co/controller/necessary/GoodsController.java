@@ -374,62 +374,135 @@ public class GoodsController {
 		return gService.getAttach(g_code);
 	}
 
-	// list.large category
-	@RequestMapping(value = "/list/categoryl/{g_category_large}", method = RequestMethod.GET)
-	public ModelAndView list(@PathVariable("g_category_large") String g_category_large) {
+	// 카테고리(라지) 부분
 
-		// 테스트
-		// System.out.println("라지카테고리 goodsctrl");
+		// list.large category
+		@RequestMapping(value = "/list/categoryl/{g_category_large}", method = RequestMethod.GET)
+		public ModelAndView list(@PathVariable("g_category_large") String g_category_large) {
 
-		int curPage = 1;
-		int amount = gService.getAmount();
-		PageTO<GoodsDTO> to = new PageTO<GoodsDTO>(curPage);
-		to.setAmount(amount);
+			// 테스트
+			System.out.println("라지 카테고리");
 
-		List<GoodsDTO> list = gService.list_category_large(to.getStartNum(), to.getPerPage(), g_category_large);
-		to.setList(list);
+			int curPage = 1;
 
-		ModelAndView mav = new ModelAndView();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("to", to);
-		mav.addObject("map", map);
+			// 여기서 문제!
+			// 모든 상품의 getAmount()를 가져온다
+			int amount = gService.getAmount_largeCategory(g_category_large);
 
-		mav.setViewName("/goods/goods_list_large");
-		return mav;
-	}
+			PageTO<GoodsDTO> to = new PageTO<GoodsDTO>(curPage);
+			to.setAmount(amount);
+			to.setPerPage(20);
 
-	// list.small.category
-	@RequestMapping(value = "/list/categorys/{g_category_small}", method = RequestMethod.GET)
-	public ModelAndView list1(@PathVariable("g_category_small") String g_category_small) {
-		System.out.println("스몰카테고리 goodsctrl");
+			List<GoodsDTO> list = gService.list_category_large(to.getStartNum(), to.getPerPage(), g_category_large);
+			to.setList(list);
 
-		int curPage = 1;
-		int amount = gService.getAmount();
-		PageTO<GoodsDTO> to = new PageTO<GoodsDTO>(curPage);
-		to.setAmount(amount);
+			ModelAndView mav = new ModelAndView();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("to", to);
+			mav.addObject("map", map);
 
-		List<GoodsDTO> list = gService.list_category_small(to.getStartNum(), to.getPerPage(), g_category_small);
-		to.setList(list);
+			mav.setViewName("/goods/category_large");
+			return mav;
+		}
 
-		ModelAndView mav = new ModelAndView();
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("to", to);
-		mav.addObject("map", map);
+		// 카테고리 large 눌렀을 때 페이징 처리
+		@RequestMapping(value = "/list/categoryl/{g_category_large}/{curPage}", method = RequestMethod.GET)
+		public ModelAndView list(@PathVariable("g_category_large") String g_category_large,
+				@PathVariable("curPage") Integer curPage) {
 
-		mav.setViewName("/goods/goods_list_large");
-		return mav;
-	}
-	
-	// g_amount read
-	@RequestMapping(value = "/amountRead/{g_code}", method = RequestMethod.GET)
-	public int amountRead(@PathVariable("g_code") String g_code) {
-		return gService.amountRead(g_code);
-	}
-	// g_amount update
-	@RequestMapping(value = "/amountUpdate/{g_code}/{g_amount}", method = RequestMethod.GET)
-	public void amountUpdate(@PathVariable("g_code") String g_code, @PathVariable("g_amount") int g_amount) {
-		gService.amountUpdate(g_code, g_amount);
-	}
+			// 테스트
+			// System.out.println("curPage:" + curPage);
+
+			// 여기서 문제!
+			// 모든 상품의 getAmount()를 가져온다
+			int amount = gService.getAmount_largeCategory(g_category_large);
+			System.out.println("라지 amount : " + amount);
+
+			PageTO<GoodsDTO> to = new PageTO<GoodsDTO>(curPage);
+			to.setAmount(amount);
+			to.setPerPage(20);
+
+			List<GoodsDTO> list = gService.list_category_large(to.getStartNum(), to.getPerPage(), g_category_large);
+			to.setList(list);
+
+			// 테스트
+			System.out.println("large:::: list:" + list.size());
+
+			ModelAndView mav = new ModelAndView();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("to", to);
+			mav.addObject("map", map);
+
+			// 테스트
+			System.out.println("large:::: " + to.getBeginPageNum() + " : " + to.getFinishedPageNum());
+
+			mav.setViewName("/goods/category_large");
+			return mav;
+		}
+
+		// 카테고리(스몰) 부분
+
+		// list.small.category
+		@RequestMapping(value = "/list/categorys/{g_category_small}", method = RequestMethod.GET)
+		public ModelAndView list1(@PathVariable("g_category_small") String g_category_small) {
+
+			System.out.println("스몰 카테고리");
+
+			int curPage = 1;
+
+			// 여기서 문제!
+			// 모든 상품의 getAmount()를 가져온다
+			int amount = gService.getAmount_SmallCategory(g_category_small);
+
+			PageTO<GoodsDTO> to = new PageTO<GoodsDTO>(curPage);
+			to.setAmount(amount);
+			to.setPerPage(20);
+
+			List<GoodsDTO> list = gService.list_category_small(to.getStartNum(), to.getPerPage(), g_category_small);
+			to.setList(list);
+
+			ModelAndView mav = new ModelAndView();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("to", to);
+			mav.addObject("map", map);
+
+			mav.setViewName("/goods/category_small");
+			return mav;
+		}
+
+		// 카테고리 small 눌렀을 때 페이징 처리
+		@RequestMapping(value = "/list/categorys/{g_category_small}/{curPage}", method = RequestMethod.GET)
+		public ModelAndView list1(@PathVariable("g_category_small") String g_category_small,
+				@PathVariable("curPage") Integer curPage) {
+
+			// 테스트
+			// System.out.println("curPage:" + curPage);
+
+			// 여기서 문제!
+			// 모든 상품의 getAmount()를 가져온다
+			int amount = gService.getAmount_SmallCategory(g_category_small);
+			System.out.println("스몰 amount : " + amount);
+
+			PageTO<GoodsDTO> to = new PageTO<GoodsDTO>(curPage);
+			to.setAmount(amount);
+			to.setPerPage(20);
+
+			List<GoodsDTO> list = gService.list_category_small(to.getStartNum(), to.getPerPage(), g_category_small);
+			to.setList(list);
+
+			// 테스트
+			System.out.println("small:::: list:" + list.size());
+
+			ModelAndView mav = new ModelAndView();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("to", to);
+			mav.addObject("map", map);
+
+			// 테스트
+			System.out.println("small:::: " + to.getBeginPageNum() + " : " + to.getFinishedPageNum());
+
+			mav.setViewName("/goods/category_small");
+			return mav;
+		}
 
 }

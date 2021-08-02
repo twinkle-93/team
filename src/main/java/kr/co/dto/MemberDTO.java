@@ -25,6 +25,7 @@ public class MemberDTO implements Serializable {
 	private String m_updateDate;
 	private int m_point;
 	private int m_money;
+	private int m_coupon;
 	
 	/*
 	private int m_myLike;
@@ -34,16 +35,17 @@ public class MemberDTO implements Serializable {
 	private String m_grade;
 	private String m_membership;
 	private int m_membershipLevel;
-	private int m_myCoupon;
 	*/
 
 	public MemberDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+
 	public MemberDTO(String m_id, String m_pw, String m_name, String m_birth, String m_email, String m_zipCode,
 			String m_address, String m_detailAddress, String m_phone, String m_gender, String m_regDate,
-			String m_updateDate, int m_point, int m_money) {
+			String m_updateDate, int m_point, int m_money, int m_coupon) {
 		super();
 		this.m_id = m_id;
 		this.m_pw = m_pw;
@@ -59,7 +61,10 @@ public class MemberDTO implements Serializable {
 		this.m_updateDate = m_updateDate;
 		this.m_point = m_point;
 		this.m_money = m_money;
+		this.m_coupon = m_coupon;
 	}
+
+
 
 	public String getM_id() {
 		return m_id;
@@ -178,6 +183,19 @@ public class MemberDTO implements Serializable {
 		this.m_point = m_point;
 	}
 
+	
+
+	public int getM_coupon() {
+		return m_coupon;
+	}
+
+
+
+	public void setM_coupon(int m_coupon) {
+		this.m_coupon = m_coupon;
+	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -210,16 +228,18 @@ public class MemberDTO implements Serializable {
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "MemberDTO [m_id=" + m_id + ", m_pw=" + m_pw + ", m_name=" + m_name + ", m_birth=" + m_birth
 				+ ", m_email=" + m_email + ", m_zipCode=" + m_zipCode + ", m_address=" + m_address
 				+ ", m_detailAddress=" + m_detailAddress + ", m_phone=" + m_phone + ", m_gender=" + m_gender
 				+ ", m_regDate=" + m_regDate + ", m_updateDate=" + m_updateDate + ", m_point=" + m_point + ", m_money="
-				+ m_money + "]";
+				+ m_money + ", m_coupon=" + m_coupon + "]";
 	}
 
-
+	
 	
 
 }

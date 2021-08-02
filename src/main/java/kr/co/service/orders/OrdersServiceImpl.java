@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.dao.goods.GoodsDAO;
 import kr.co.dao.orders.OrdersDAO;
 import kr.co.dto.OrdersDTO;
+import kr.co.dto.OrdersDTO2;
 
 @Service
 public class OrdersServiceImpl implements OrdersService{
@@ -32,7 +33,12 @@ public class OrdersServiceImpl implements OrdersService{
 	}
 
 	@Override
-	public List<OrdersDTO> listById(String m_id) {
+	public List<OrdersDTO2> listById(String m_id) {
 		return oDao.listById(m_id);
+	}
+
+	@Override
+	public List<OrdersDTO2> list() {
+		return oDao.list();
 	}
 }

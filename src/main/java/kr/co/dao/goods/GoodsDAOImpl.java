@@ -151,6 +151,17 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public List<GoodsDTO> regList() {
 		return session.selectList(NAMESPACE+".regList");
 	}
+	
+	@Override
+	public int getAmount_largeCategory(String g_category_large) {
+		return session.selectOne(NAMESPACE + ".getAmount_largeCategory", g_category_large);
+	}
+	
+	@Override
+	public int getAmount_SmallCategory(String g_category_small) {
+		return session.selectOne(NAMESPACE + ".getAmount_SmallCategory", g_category_small);
+	}
+	
 	@Override
 	public int amountRead(String g_code) {
 		return session.selectOne(NAMESPACE+".amountRead", g_code);

@@ -1,6 +1,6 @@
 @charset "UTF-8";
     
-    .body {width: 600px; height: 100%; margin: auto;}
+    .body {width: 800px; height: 100%; margin: auto;}
     .title {font-size: 3em; text-align: center; margin: 40px 0; color: green;}
     
     .day {float: right;}

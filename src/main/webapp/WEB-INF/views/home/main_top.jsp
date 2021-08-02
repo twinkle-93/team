@@ -7,12 +7,13 @@
 	 	<div class="container">
 	   		<div>
 	   		<a href="/">
-			<i class="fas fa-seedling fa-2x"></i>
-			<i class="fas fa-seedling fa-2x"></i>
-			<i class="fas fa-seedling fa-2x"></i>
-	   		<br>Spring
+			<i class="fas fa-seedling fa-3x"></i>
+			<i class="fas fa-seedling fa-3x"></i>
+			<i class="fas fa-seedling fa-3x"></i>
+	   		<br>
+	   		<span>Spring</span>
 	   		<br><br>
-	   		봄처럼 싱그러운 쇼핑몰</a></div>
+	   		<span>봄처럼 싱그러운 쇼핑몰</span></a></div>
    		</div>
 	 
 	 <div class="container-fluid">

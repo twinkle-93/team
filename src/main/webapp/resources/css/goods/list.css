@@ -2,14 +2,13 @@
     
   	.title{font-size: 3em; text-align: center; margin: 40px 0;}
   	.title > a {color: green; text-decoration: none;}
-  	.table {height: 450px; margin-bottom: 50px;}
+  	.tab_body {height: 500px;}
   	.body{width: 1000px; height:900px; margin: auto; text-align: center; margin-top: 50px;}
   	.list_btn > button { float: left; margin-bottom: 30px; background-color: green; color: white;}
   	.list_btn > a {float: right; margin-bottom: 30px; background-color: green; color: white;}
   
   	
   	페이징 부분
-    .pagestyle > .active > a{ background-color: pink; border: 0; }
 	.pagination > .active > a:link{
 		color: black;
 	}
